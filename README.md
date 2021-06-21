@@ -4,7 +4,7 @@ This is a project that is part of the S21 UWaterloo CSC x DSC Project Program!
 
 ## Overview
 
-A short description of your project! Highlight the problem/challenge and how you'll be approaching it.
+An interactive map to show the top songs in countries around the world!
 
 ### Members
 Mentor:
