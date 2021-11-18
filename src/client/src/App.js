@@ -23,9 +23,3 @@ export function App() {
     </div>
   );
 }
-
-/*
-<Router exact path="/" component={Home} />
-      <Router exact path="/login" component={Login} />
-      <Router exact path="/profile" component={Profile} />
-      <Router exact path="/eventlist" component={EventList} />*/
