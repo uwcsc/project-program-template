@@ -7,7 +7,7 @@ function Profile(){
     <div>
       <h1>Welcome {userid}</h1>
     </div>
-  )
+  );
 }
 
 export default Profile;
