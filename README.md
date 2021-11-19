@@ -1,4 +1,4 @@
-# Team [Letter] - [Project Title]
+# Team Q - [Project Title]
 
 This is a project that is part of the S21 UWaterloo CSC x DSC Project Program! 
 
@@ -8,12 +8,13 @@ A short description of your project! Highlight the problem/challenge and how you
 
 ### Members
 Mentor:
-- [FullName]
+- Mikhail Tsirlin
 
 Mentees:
-- [FullName]
-- [FullName]
-- [FullName]
+- Gen Nishiwaki
+- Daniel Kim
+- Connie Wang
+- Katherine Li
 
 ## About the Project
 
