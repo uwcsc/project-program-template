@@ -1,9 +1,12 @@
 import React from "react";
+import "./Login.css";
+import NavBar from "../components/NavBar";
 
 function Login(){
   return(
     <div>
-      <h1>Login</h1>
+      <NavBar />
+      <header className="title">Login</header>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import { App } from "./App";
+import App from "./App";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
 import EventList from "./Pages/Events/EventList";
@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 ReactDOM.render(
+  <div style={{backgroundColor: "blue"}}>
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
@@ -17,7 +18,8 @@ ReactDOM.render(
       <Route path="profile" element={<Profile />} />
       <Route path="eventlist" element={<EventList />} />
     </Routes>
-  </BrowserRouter>,
+  </BrowserRouter>
+  </div>,
   document.getElementById("root")
 );
 

@@ -1,5 +1,12 @@
 {
   "dependencies": {
-    "react-router-dom": "^6.0.2"
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "components": "^0.1.0",
+    "react-router-dom": "^6.0.2",
+    "styled": "^1.0.0",
+    "styled-components": "^5.3.3"
   }
 }
