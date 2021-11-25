@@ -18,4 +18,4 @@ Mentees:
 
 ## About the Project
 
-...Specific details on the project. Add some pictures/videos too!
+...Specific details on the project. Add some pictures/videos too! 
