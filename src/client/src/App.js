@@ -1,11 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import Login from './components/Login';
+import EventList from './components/EventList';
+import EventForm from './components/EventForm';
+import {Route, Routes} from "react-router-dom";
 
-const App = () => {
-  <div>
-    <Login />
-  </div>
+function App() {
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<EventList />} />
+        <Route path="/add" element={<EventForm />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
