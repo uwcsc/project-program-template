@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { application } = require("express");
 require("dotenv").config();
+const dao = require("./db/dao");
 
 const port = process.env.SERVER_PORT;
 const app = express();
@@ -12,4 +13,5 @@ const dbo = require("./db/conn");
 
 app.listen(port, () => {
 	console.log(`Server is now running on port ${port}`);
+	console.log(dao.hasUser("eee"))
 });
