@@ -32,7 +32,7 @@ import { userSchema, eventSchema, dummyUser, dummyEvent } from "../schema";
  * @param email the email of the new user.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const addBasicUser = (firstname: string, lastname: string, username: string, email: string) => {
+export const addBasicUser = (firstname: string, lastname: string, username: string, email: string): boolean => {
 	return true;
 };
 

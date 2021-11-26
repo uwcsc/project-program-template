@@ -31,7 +31,7 @@ import { userSchema, eventSchema, dummyUser, dummyEvent } from "../schema";
  * @param isPublic whether the event is public or not.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const addBasicEvent = (name: string, date: string, isPublic: boolean) => {
+export const addBasicEvent = (name: string, date: string, isPublic: boolean): boolean => {
 	return true;
 };
 
