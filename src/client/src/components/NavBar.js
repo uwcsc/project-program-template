@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
-  const loggedIn = localStorage.getItem("user");
+  //const loggedIn = localStorage.getItem("user");
+  const loggedIn = true;
 
   const Logout = () => {
     localStorage.setItem("");
