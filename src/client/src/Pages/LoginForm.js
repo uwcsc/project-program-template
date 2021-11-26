@@ -1,15 +1,61 @@
 import React from "react";
 import "./LoginForm.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Home from "./Home";
+import EventList from "./Events/EventList";
 
-function LoginForm({ LoginFunc, error} ){
+const admin = {
+  email: "admin@admin.com",
+  username: "Admin",
+  password: "admin",
+};
 
-  const [userInfo, setUserInfo] = useState({username: "", email: "", password: ""});
+function LoginForm({ currentUser }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [user, setUser] = useState();
+  const [error, setError] = useState("");
 
-  const handleSubmit = e => {
+  /*
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+      console.log(foundUser);
+    }
+  }, []);
+  */
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    LoginFunc(userInfo);
+
+    localStorage.setItem("user", {
+      username: "Admin",
+      password: "admin",
+      email: "admin@admin.com",
+    });
+
+    setUser({ username: "Admin", password: "admin", email: "admin@admin.com" });
+
+    /*
+    const response = await axios.post(
+      "http://blogservice.herokuapp.com/api/login",
+      user
+    );
+    
+    setUser(response.data);
+    localStorage.setItem("user", response.data);
+    console.log(response.data);
+    */
+  };
+
+  if (username == admin.username && password == admin.password) {
+    console.log("test");
+    return <Home />;
   }
 
   return (
@@ -17,18 +63,33 @@ function LoginForm({ LoginFunc, error} ){
       <form onSubmit={handleSubmit}>
         <div className="inner-form">
           <h2>Login</h2>
-          {(error != "") ? (<div className="error">{error}</div> ) : "" }
+          {error != "" ? <div className="error">{error}</div> : ""}
           <div className="form-group">
             <label htmlFor="username">Username: </label>
-            <input type="text" name="username" id="username" onChange={e => setUserInfo({...userInfo, username: e.target.value})} value={userInfo.username} />
+            <input
+              type="text"
+              value={username}
+              placeholder="enter a username"
+              onChange={({ target }) => setUsername(target.value)}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="email">Email: </label>
-            <input type="text" name="email" id="email" onChange={e => setUserInfo({...userInfo, email: e.target.value})} value={userInfo.email} />
+            <input
+              type="email"
+              value={email}
+              placeholder="email"
+              onChange={({ target }) => setEmail(target.value)}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password: </label>
-            <input type="text" name="password" id="password" onChange={e => setUserInfo({...userInfo, password: e.target.value})} value={userInfo.password} />
+            <input
+              type="password"
+              value={password}
+              placeholder="password"
+              onChange={({ target }) => setPassword(target.value)}
+            />
           </div>
           <input type="submit" value="Login" />
         </div>

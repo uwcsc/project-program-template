@@ -1,45 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { NavLink as Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
-export default function NavBar(loggedIn) {
+export default function NavBar() {
+  const loggedIn = localStorage.getItem("user");
+
+  const Logout = () => {
+    localStorage.setItem("");
+  };
+
   return (
     <>
       <nav className="nav">
         <div className="nav-bar-container">
           <navlogo className="nav-logo-container">
-            <Link className="nav-logo" to="/">
+            <Link className="nav-logo" to="/home">
               <FontAwesomeIcon className="icon" icon={faMoon} />
               Good Night Out
             </Link>
           </navlogo>
           <bars />
           <ul className="nav-menu">
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">
-                Login
+            {loggedIn ? (
+              <Link
+                to="/loginform"
+                className="nav-link"
+                onClick={Logout}
+              >
+                Logout
               </Link>
-            </li>
+            ) : (
+              <li className="nav-item">
+                <Link
+                  to="/loginform"
+                  className="nav-link"
+                >
+                  Login
+                </Link>
+              </li>
+            )}
             <li className="nav-item">
-              <Link to="/eventlist" className="nav-link">
+              <Link
+                to="/eventlist"
+                className={loggedIn ? "nav-link" : "disabled-link"}
+              >
                 Event List
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/profile" className="nav-link">
+              <Link
+                to="/profile"
+                className={loggedIn ? "nav-link" : "disabled-link"}
+              >
                 Profile
               </Link>
             </li>
           </ul>
           <div className="nav-btn">
-            <Link className="nav-btn-link" to="/profile">
+            <Link
+              className={loggedIn ? "nav-link" : "disabled-link"}
+              to="/profile"
+            >
               Settings
             </Link>
           </div>
         </div>
-        {loggedIn ? <button>Log Out</button> : <div></div>} 
+        {false ? <button>Log Out</button> : <div></div>}
       </nav>
     </>
   );
