@@ -23,11 +23,11 @@ export interface userSchema {
 export interface eventSchema {
   id: number,
   name: string,
-  description?: string,
-  location?: string,
   date: Date,
   is_public: boolean,
   participants: string[] // this will actually be a list of documents, once I figure out the typing lol
+  description?: string,
+  location?: string,
 }
 
 /**
