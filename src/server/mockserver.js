@@ -14,5 +14,4 @@ app.listen(port, async () => {
 	console.log(`Server is now running on port ${port}`);
 
 	await dao.connectToServer();
-	// console.log((await dao.getDb()).collections);
 });

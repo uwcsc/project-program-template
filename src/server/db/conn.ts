@@ -7,12 +7,16 @@ let workingDb;
 export const connectToServer = async () => {
 	const db = await client.connect();
 
-	if (db) {
-		console.log("Successfully connected to db!");
-		workingDb = db.db("night-night");
-	} else {
-		throw db; // I think this should be right? Check later...
-	}
+	return new Promise((resolve, reject) => {
+		if (db) {
+			console.log("Successfully connected to db!");
+			workingDb = db.db("night-night");
+
+			resolve(workingDb);
+		} else {
+			reject()
+		}
+	})	
 };
 
 export const getDb = async () => {
