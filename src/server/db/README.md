@@ -2,6 +2,12 @@
 
 This package contains all the functions needed for the proper operation of the database, and all database interactions should be performed via functions provided by this package to ensure normalization of database data.
 
+## Initialization
+Ensure the proper Atlas URL is first defined in `.env`.
+
+Before the use of any function, the dao must first establish a connection with the MongoDB database. This can be done by including the command `await dao.connectToServer();` in your code.
+
+Once the database is initialized, the console message `"Successfully connected to db!"` should appear. All functions can then be used.
 ## DB Schemas
 
 The following are the schemas for the database. Note that fields marked with a `?:` are optional.
