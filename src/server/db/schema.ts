@@ -21,7 +21,6 @@ export interface userSchema {
  * Participants must be provided, but can be an empty list.
  */
 export interface eventSchema {
-  id: number,
   name: string,
   date: Date,
   is_public: boolean,
@@ -44,7 +43,6 @@ export const dummyUser: userSchema = {
  * A dummy event for testing. Holds only the required fields.
  */
 export const dummyEvent: eventSchema = {
-  id: 1,
   name: "cool",
   date: new Date(),
   is_public: true,

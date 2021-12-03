@@ -14,7 +14,6 @@ exports.dummyUser = {
  * A dummy event for testing. Holds only the required fields.
  */
 exports.dummyEvent = {
-    id: 1,
     name: "cool",
     date: new Date(),
     is_public: true,
