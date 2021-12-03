@@ -38,8 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.getDb = exports.connectToServer = void 0;
 var mongodb_1 = require("mongodb");
-var Db = process.env.ATLAS_URI;
-var client = new mongodb_1.MongoClient(Db);
+var dbUrl = process.env.ATLAS_URI;
+var client = new mongodb_1.MongoClient(dbUrl);
 var workingDb;
 var connectToServer = function () { return __awaiter(void 0, void 0, void 0, function () {
     var db;

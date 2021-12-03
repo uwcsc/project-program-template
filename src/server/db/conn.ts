@@ -1,7 +1,7 @@
-import { MongoClient } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 
-const Db = process.env.ATLAS_URI;
-const client = new MongoClient(Db);
+const dbUrl = process.env.ATLAS_URI;
+const client = new MongoClient(dbUrl);
 let workingDb;
 
 export const connectToServer = async () => {
@@ -19,7 +19,7 @@ export const connectToServer = async () => {
 	})	
 };
 
-export const getDb = async () => {
+export const getDb = async (): Promise<Db> => {
 	return new Promise((resolve, reject) => {
 		if (workingDb) {
 			resolve(workingDb);
