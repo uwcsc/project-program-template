@@ -1,3 +1,5 @@
+//TODO: make separate interface for schemas + _id
+
 /**
  * The default database schema for a user.
  * 

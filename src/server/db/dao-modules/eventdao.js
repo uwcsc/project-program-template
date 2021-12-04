@@ -201,7 +201,7 @@ var hasEvent = function (eventId) { return __awaiter(void 0, void 0, void 0, fun
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, (0, exports.getEvent)(eventId)];
-            case 1: return [2 /*return*/, (_a.sent()) == null];
+            case 1: return [2 /*return*/, !((_a.sent()) == null)];
         }
     });
 }); };

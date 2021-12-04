@@ -1,4 +1,5 @@
 "use strict";
+//TODO: make separate interface for schemas + _id
 exports.__esModule = true;
 exports.dummyEvent = exports.dummyUser = void 0;
 /**
