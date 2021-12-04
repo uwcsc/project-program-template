@@ -128,12 +128,12 @@ export const getUser = async (username: string): Promise<null | userSchema> => {
  *
  * @deprecated
  * Consider checking if `getUser()` is null instead.
- * 
+ *
  * @param username the username of the user to find.
  * @returns a boolean, true if the user exists and false otherwise.
  */
 export const hasUser = async (username: string): Promise<boolean> => {
-	return !((await getUser(username)) == null)
+	return !((await getUser(username)) == null);
 };
 
 /**
@@ -142,13 +142,13 @@ export const hasUser = async (username: string): Promise<boolean> => {
  * Technically, the provided `searchString` may be regex. However, noticeable
  * differences will arise (eg. dot characters `.` will not match every character).
  * Note that this search is case-insensitive.
- * 
+ *
  * @param searchString a string containing a substring to look for in users.
  * @returns a list of `userSchema` containing potential user matches.
  */
 export const findMatchingUsers = async (searchString: string): Promise<userSchema[]> => {
 	const db = await getDb();
-	const query = { username: { $regex: searchString }, $options: "i" };
+	const query = { username: { $regex: searchString, $options: "i" } };
 
 	return (await db.collection("users").find(query)).toArray() as unknown as userSchema[];
 };
