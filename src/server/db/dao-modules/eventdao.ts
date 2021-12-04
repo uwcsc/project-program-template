@@ -115,7 +115,7 @@ export const getEvent = async (eventId: ObjectId): Promise<null | eventSchema> =
  * @returns a boolean, true if the event exists and false otherwise.
  */
 export const hasEvent = async (eventId: ObjectId): Promise<boolean> => {
-	return (await getEvent(eventId)) == null;
+	return !((await getEvent(eventId)) == null);
 };
 
 /**
