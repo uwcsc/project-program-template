@@ -119,28 +119,51 @@ exports.addBasicEvent = addBasicEvent;
  * ! Note! I don't know if mongo returns tokens or if we need strings. Will look into accordingly! Please keep
  * ! using this function if you are, though. The parameter might change.
  *
- * @param eventId the event's id.
+ * @param eventId the event's `ObjectId`.
  * @param field the field to be updated.
  * @param value the new value for the field.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-var updateEvent = function (eventId, field, value) {
-    return true;
-};
+var updateEvent = function (eventId, field, value) { return __awaiter(void 0, void 0, void 0, function () {
+    var db, query, newValues;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, (0, conn_1.getDb)()];
+            case 1:
+                db = _a.sent();
+                query = { _id: eventId };
+                newValues = {
+                    $set: {
+                        field: value
+                    }
+                };
+                return [4 /*yield*/, db.collection("events").updateOne(query, newValues)];
+            case 2: return [2 /*return*/, (_a.sent()).acknowledged];
+        }
+    });
+}); };
 exports.updateEvent = updateEvent;
 /**
  * Deletes a event from the mongoDB database.
  *
  * Note that specifying a event that does not exist will return a `false`.
  *
- * ! Note! I don't know if mongo returns tokens or if we need strings. Will look into accordingly! Please keep
- * ! using this function if you are, though. The parameter might change.
- * @param eventId the event's id.
+ * @param eventId the event's `ObjectId`.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-var deleteEvent = function (eventId) {
-    return true;
-};
+var deleteEvent = function (eventId) { return __awaiter(void 0, void 0, void 0, function () {
+    var db, query;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, (0, conn_1.getDb)()];
+            case 1:
+                db = _a.sent();
+                query = { _id: eventId };
+                return [4 /*yield*/, db.collection("events").deleteOne(query)];
+            case 2: return [2 /*return*/, (_a.sent()).acknowledged];
+        }
+    });
+}); };
 exports.deleteEvent = deleteEvent;
 /**
  * Retrieves a event from the mongoDB database given a event's id.
@@ -156,8 +179,10 @@ var getEvent = function (eventId) { return __awaiter(void 0, void 0, void 0, fun
             case 1:
                 db = _a.sent();
                 query = { _id: eventId };
-                // I love typescript
-                return [2 /*return*/, db.collection("events").findOne(query)];
+                return [4 /*yield*/, db.collection("events").findOne(query)];
+            case 2: 
+            // I love typescript
+            return [2 /*return*/, (_a.sent())];
         }
     });
 }); };
@@ -165,20 +190,43 @@ exports.getEvent = getEvent;
 /**
  * Determines if a event by the given event id exists.
  *
- * @param eventId the event's id.
+ * @deprecated
+ * This function has been deprecated. Consider using `getEvent` and checking if
+ * it is null instead.
+ *
+ * @param eventId the ObjectId of this event.
  * @returns a boolean, true if the event exists and false otherwise.
  */
-var hasEvent = function (eventId) {
-    return true;
-};
+var hasEvent = function (eventId) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, (0, exports.getEvent)(eventId)];
+            case 1: return [2 /*return*/, (_a.sent()) == null];
+        }
+    });
+}); };
 exports.hasEvent = hasEvent;
 /**
  * Given a substring, finds events with a name containing the substring.
  *
+ * Technically, the provided `searchString` may be regex. However, noticeable
+ * differences will arise (eg. dot characters `.` will not match every character).
+ * Note that this search is case-insensitive.
+ *
  * @param searchString a string containing a substring to look for in events.
  * @returns a list of `eventSchema` containing potential event matches.
  */
-var findMatchingEvents = function (searchString) {
-    return [];
-};
+var findMatchingEvents = function (searchString) { return __awaiter(void 0, void 0, void 0, function () {
+    var db, query;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, (0, conn_1.getDb)()];
+            case 1:
+                db = _a.sent();
+                query = { name: { $regex: searchString }, $options: "i" };
+                return [4 /*yield*/, db.collection("events").find(query)];
+            case 2: return [2 /*return*/, (_a.sent()).toArray()];
+        }
+    });
+}); };
 exports.findMatchingEvents = findMatchingEvents;
