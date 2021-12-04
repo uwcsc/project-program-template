@@ -22,7 +22,7 @@ interface userSchemaWithId extends userSchema {
 export const addUser = async (user: userSchema): Promise<boolean> => {
 	const db = await getDb();
 	const query = {
-		_id: new ObjectId(user.username),
+		_id: new ObjectId(),
 		...user,
 	};
 
@@ -51,7 +51,7 @@ export const addBasicUser = async (
 ): Promise<boolean> => {
 	const db = await getDb();
 	const query: userSchemaWithId = {
-		_id: new ObjectId(username),
+		_id: new ObjectId(),
 		firstname: firstname,
 		lastname: lastname,
 		username: username,

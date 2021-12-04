@@ -70,7 +70,7 @@ var addUser = function (user) { return __awaiter(void 0, void 0, void 0, functio
             case 0: return [4 /*yield*/, (0, conn_1.getDb)()];
             case 1:
                 db = _a.sent();
-                query = __assign({ _id: new bson_1.ObjectId(user.username) }, user);
+                query = __assign({ _id: new bson_1.ObjectId() }, user);
                 return [4 /*yield*/, db.collection("users").insertOne(query)];
             case 2: return [2 /*return*/, (_a.sent()).acknowledged];
         }
@@ -99,7 +99,7 @@ var addBasicUser = function (firstname, lastname, username, email) { return __aw
             case 1:
                 db = _a.sent();
                 query = {
-                    _id: new bson_1.ObjectId(username),
+                    _id: new bson_1.ObjectId(),
                     firstname: firstname,
                     lastname: lastname,
                     username: username,
