@@ -26,5 +26,5 @@ app.listen(port, async () => {
 	// let cool = await dao.getEvent(new ObjectId("61a968cdf4168796656e721e"));
 	// console.log(cool)
 
-	console.log(await dao.addEvent(dummyEvent));
+	// console.log(await dao.addEvent(dummyEvent));
 });

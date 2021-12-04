@@ -1,6 +1,6 @@
 import { ObjectId } from "bson";
 import { getDb } from "../conn";
-import { userSchema, eventSchema, dummyUser, dummyEvent } from "../schema";
+import { eventSchema, dummyEvent } from "../schema";
 
 /**
  * Adds a new event to the mongoDB database.
@@ -57,13 +57,22 @@ export const addBasicEvent = async (name: string, date: Date, isPublic: boolean)
  * ! Note! I don't know if mongo returns tokens or if we need strings. Will look into accordingly! Please keep
  * ! using this function if you are, though. The parameter might change.
  *
- * @param eventId the event's id.
+ * @param eventId the event's `ObjectId`.
  * @param field the field to be updated.
  * @param value the new value for the field.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const updateEvent = (eventId: number, field: string, value: any): boolean => {
-	return true;
+export const updateEvent = async (eventId: ObjectId, field: string, value: any): Promise<boolean> => {
+	const db = await getDb();
+	const query = { _id: eventId };
+
+	const newValues = {
+		$set: {
+			field: value,
+		},
+	};
+
+	return (await db.collection("events").updateOne(query, newValues)).acknowledged;
 };
 
 /**
@@ -71,13 +80,14 @@ export const updateEvent = (eventId: number, field: string, value: any): boolean
  *
  * Note that specifying a event that does not exist will return a `false`.
  *
- * ! Note! I don't know if mongo returns tokens or if we need strings. Will look into accordingly! Please keep
- * ! using this function if you are, though. The parameter might change.
- * @param eventId the event's id.
+ * @param eventId the event's `ObjectId`.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const deleteEvent = (eventId: number): boolean => {
-	return true;
+export const deleteEvent = async (eventId: ObjectId): Promise<boolean> => {
+	const db = await getDb();
+	const query = { _id: eventId };
+
+	return (await db.collection("events").deleteOne(query)).acknowledged;
 };
 
 /**
@@ -91,25 +101,36 @@ export const getEvent = async (eventId: ObjectId): Promise<null | eventSchema> =
 	const query = { _id: eventId };
 
 	// I love typescript
-	return (db.collection("events").findOne(query) as unknown) as eventSchema;
+	return (await db.collection("events").findOne(query)) as unknown as eventSchema;
 };
 
 /**
  * Determines if a event by the given event id exists.
  *
- * @param eventId the event's id.
+ * @deprecated
+ * This function has been deprecated. Consider using `getEvent` and checking if
+ * it is null instead.
+ *
+ * @param eventId the ObjectId of this event.
  * @returns a boolean, true if the event exists and false otherwise.
  */
-export const hasEvent = (eventId: string): boolean => {
-	return true;
+export const hasEvent = async (eventId: ObjectId): Promise<boolean> => {
+	return (await getEvent(eventId)) == null;
 };
 
 /**
  * Given a substring, finds events with a name containing the substring.
  *
+ * Technically, the provided `searchString` may be regex. However, noticeable
+ * differences will arise (eg. dot characters `.` will not match every character).
+ * Note that this search is case-insensitive.
+ *
  * @param searchString a string containing a substring to look for in events.
  * @returns a list of `eventSchema` containing potential event matches.
  */
-export const findMatchingEvents = (searchString: string): eventSchema[] => {
-	return [];
+export const findMatchingEvents = async (searchString: string): Promise<eventSchema[]> => {
+	const db = await getDb();
+	const query = { name: { $regex: searchString }, $options: "i" };
+
+	return (await db.collection("events").find(query)).toArray() as unknown as eventSchema[];
 };
