@@ -20,7 +20,7 @@ function AddEvent() {
   };
 
   return (
-    <div>
+    <div className="addevent-container">
       <ul>
         {eventList.map}
       </ul>

@@ -8,7 +8,7 @@ import { render } from "react-dom";
 import { Link } from "react-router-dom";
 
 function EventList() {
-  const [eventList, addToEventList] = useState([]);
+  const [eventList, addToEventList] = useState(["event", "test"]);
   const [eventDetails, toggleEventDetails] = useState(false);
 
   const addEvent = () => {

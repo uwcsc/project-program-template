@@ -1,6 +1,24 @@
+.event-list {
+  align: center;
+}
+
 .event-list h1 {
   text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-style: "Trebuchet MS";
   font-size: 30;
+}
+
+.event-list.AddEvent {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  alignment: center;
+  justify-content: center;
+  display: flex;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-style: Cambria;
+  font-size: 17pt;
+  background-image: linear-gradient(to bottom right, "yellow", #fe4880);
 }
