@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./EventList.css";
-import Event from "../../components/Event";
+import Event from "./Event";
 import AddEvent from "./AddEvent";
 import Home from "../Home";
 import { render } from "react-dom";
