@@ -11,19 +11,20 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render (
-  <div >
-    <BrowserRouter>
-    <NavBar />
-    <ErrorBoundary >
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="home" element={<Home />} />
-        <Route path="loginform" element={<LoginForm />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="eventlist" element={<EventList />} />
-      </Routes>
-      </ErrorBoundary>
-    </BrowserRouter>
-  </div>,
+  <App/>,
+  // <div >
+  //   <BrowserRouter>
+  //   <NavBar />
+  //   <ErrorBoundary >
+  //     <Routes>
+  //       <Route path="/" element={<App />} />
+  //       <Route path="home" element={<Home />} />
+  //       <Route path="loginform" element={<LoginForm />} />
+  //       <Route path="profile" element={<Profile />} />
+  //       <Route path="eventlist" element={<EventList />} />
+  //     </Routes>
+  //     </ErrorBoundary>
+  //   </BrowserRouter>
+  // </div>,
   document.getElementById("root")
 );

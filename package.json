@@ -10,7 +10,9 @@
     "@mui/material": "^5.2.1",
     "axios": "^0.24.0",
     "components": "^0.1.0",
+    "npm": "^8.3.0",
     "react-router-dom": "^6.0.2",
+    "start": "^5.1.0",
     "styled": "^1.0.0",
     "styled-components": "^5.3.3"
   }

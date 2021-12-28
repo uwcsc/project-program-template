@@ -12,33 +12,10 @@ import axios from "axios";
 
 
 export default function App() {
-
-  const [user, setUser] = useState({username: "", password: "", email: ""});
-
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-      console.log(foundUser);
-    }
-  }, []);
-  
-  const Logout = () => {
-    setUser({ username: "", email: "" });
-  };
-
   return (
-    <div className="App">
-      {user.username != "" ? (
-        <div className="welcome">
-          <h1>
-            Welcome, <span>{user.username}</span>
-          </h1>
-        </div>
-      ) : (
-        <LoginForm />
-      )}
+    <div className="container">
+       <h1>Welcome</h1>
+       <h2>Login to Good Night Out</h2>
     </div>
-  );
+  )
 }

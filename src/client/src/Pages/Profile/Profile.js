@@ -1,10 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, Link } from "react";
 import NavBar from "../../components/NavBar";
 import EditProfile from "./EditProfile";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faPencil } from 'react-icons/fa';
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {faPencil} from "@fortawesome/free-solid-svg-icons";
 
 let userid = "Test-name";
 
@@ -36,7 +37,7 @@ function Profile() {
             <div className="email">Email: {currentUser.email}</div>
             <div className="password">Password: {currentUser.password}</div>
             <Link className="edit-profile" onClick={() => toggleEditMode(!editMode)}>
-              <FontAwesomeIcon className="icon" icon={faPencil} />
+              <faPencil/>
               Good Night Out
             </Link>
           </div>
