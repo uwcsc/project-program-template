@@ -1,21 +1,44 @@
-import './App.css';
-import EventList from './components/EventList';
-import EventForm from './components/EventForm';
-import {Route, Routes} from "react-router-dom";
-import LoginForm from './components/Login';
-import RegisterForm from './components/Register';
+import { useState, useEffect } from "react";
+import React from "react";
+import "./App.css";
+import Home from "./Pages/Home";
+import LoginForm from "./Pages/LoginForm";
+import NavBar from "./components/NavBar";
+import axios from "axios";
 
-function App() {
+// require('react-dom');
+// window.React2 = require('react');
+// console.log(window.React1 === window.React2);
+
+
+export default function App() {
+
+  const [user, setUser] = useState({username: "", password: "", email: ""});
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+      console.log(foundUser);
+    }
+  }, []);
+  
+  const Logout = () => {
+    setUser({ username: "", email: "" });
+  };
+
   return (
-    <div>
-      <Routes>
-        <Route exact path="/" element={<EventList />} />
-        <Route exact path="/add" element={<EventForm />} />
-        <Route exact path="/login" element={<LoginForm />} />
-        <Route exact path="/register" element={<RegisterForm />} />
-      </Routes>
+    <div className="App">
+      {user.username != "" ? (
+        <div className="welcome">
+          <h1>
+            Welcome, <span>{user.username}</span>
+          </h1>
+        </div>
+      ) : (
+        <LoginForm />
+      )}
     </div>
   );
 }
-
-export default App;
