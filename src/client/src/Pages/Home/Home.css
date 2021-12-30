@@ -1,0 +1,12 @@
+/* span {
+  background-color: rgb(194, 191, 191);
+  border-radius: 5px;
+  padding: 4px 10px
+} */
+
+header {
+  height: 30vw;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+}

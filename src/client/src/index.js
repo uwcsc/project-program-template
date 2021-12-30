@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import App from "./App";
 import LoginForm from "./Pages/LoginForm";
-import Home from "./Pages/Home";
+import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
 import EventList from "./Pages/Events/EventList";
 import ErrorBoundary from "./components/ErrorBoundary";

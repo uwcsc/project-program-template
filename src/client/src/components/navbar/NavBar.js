@@ -1,10 +1,17 @@
 import React from "react";
-import { Nav, NavLink, Bars, NavBtnLink, NavMenu, NavBtn, NavLogo } from './navbarElements.js'
+import {
+  Nav,
+  NavLink,
+  Bars,
+  NavBtnLink,
+  NavMenu,
+  NavBtn,
+  NavLogo,
+} from "./navbarElements.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
-
   return (
     <>
       <Nav className="nav">
@@ -20,9 +27,9 @@ export default function NavBar() {
           <NavLink to="/profile" activeStyle>
             Profile
           </NavLink>
-          <NavBtn to="/" activeStyle>
-          <NavBtnLink to="/">Log Out</NavBtnLink>
-        </NavBtn>
+          <NavBtn activeStyle>
+            <NavBtnLink to="/home">Log Out</NavBtnLink>
+          </NavBtn>
         </NavMenu>
         {/* <NavBtn to="/" activeStyle>
           <NavBtnLink to="/">Log Out</NavBtnLink>
