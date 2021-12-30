@@ -1,12 +1,13 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import LoginForm from "./Pages/LoginForm";
 import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
 import Events from "./Pages/Events/Events";
+import MyEvents from "./Pages/Events/MyEvents";
 import ErrorBoundary from "./components/ErrorBoundary";
-import ReactDOM from "react-dom";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render (
@@ -16,9 +17,9 @@ ReactDOM.render (
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="home" element={<Home />} />
-        <Route path="loginform" element={<LoginForm />} />
         <Route path="profile" element={<Profile />} />
         <Route path="eventlist" element={<Events />} />
+        <Route path="myevents" element={<MyEvents />}/>
       </Routes>
       </ErrorBoundary>
     </BrowserRouter>

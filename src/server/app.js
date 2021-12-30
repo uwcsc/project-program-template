@@ -15,3 +15,7 @@ app.get('', (req,res) => {
 app.get('/home', (req, res) => {
   res.render('../client/src/Pages/Home.js')
 })
+
+app.get('/events', (req,res) => {
+  res.render()
+})

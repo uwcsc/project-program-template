@@ -31,12 +31,9 @@ export default function NavBar() {
             Profile
           </NavLink>
           <NavBtn activeStyle>
-            <NavBtnLink to="/home">Log Out</NavBtnLink>
+            <NavBtnLink to="/">Log Out</NavBtnLink>
           </NavBtn>
         </NavMenu>
-        {/* <NavBtn to="/" activeStyle>
-          <NavBtnLink to="/">Log Out</NavBtnLink>
-        </NavBtn> */}
       </Nav>
     </>
   );
