@@ -6,9 +6,9 @@ function Home(){
   return(
     <>
       <NavBar />
-      <header>
+      <div class="header">
         <h1>Welcome to <span>Good Night Out</span></h1>
-      </header>
+      </div>
       
     </>
   );

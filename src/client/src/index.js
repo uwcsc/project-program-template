@@ -4,7 +4,7 @@ import App from "./App";
 import LoginForm from "./Pages/LoginForm";
 import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
-import EventList from "./Pages/Events/EventList";
+import Events from "./Pages/Events/Events";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -18,7 +18,7 @@ ReactDOM.render (
         <Route path="home" element={<Home />} />
         <Route path="loginform" element={<LoginForm />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="eventlist" element={<EventList />} />
+        <Route path="eventlist" element={<Events />} />
       </Routes>
       </ErrorBoundary>
     </BrowserRouter>

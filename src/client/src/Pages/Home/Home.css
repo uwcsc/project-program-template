@@ -4,7 +4,7 @@
   padding: 4px 10px
 } */
 
-header {
+.header {
   height: 30vw;
   margin-top: 5%;
   display: flex;

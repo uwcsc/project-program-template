@@ -1,0 +1,29 @@
+.event-container {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-container__box {
+  display: flex;
+
+}
+
+.info {
+  display: inline-block;
+  width: 20%;
+}
+
+.description {
+  float: right;
+  margin-left: 23%;
+  position: absolute;
+  display: flex;
+}
+
+.description span {
+  margin-top: 0%;
+}
+

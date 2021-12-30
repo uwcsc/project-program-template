@@ -1,16 +1,30 @@
-import React from 'react';
+import React from "react";
+import "./Event.css";
 
-function Event(props) {
+function Event({ event }) {
   return (
     <div className="event-container">
-      <header>{props.eventName}</header>
-      <div className="description">{props.description}</div>
-      <div className="details">
-        <div className="time">{props.time}</div>
-        <div className="location">{props.location}</div>
+      <div className="event-container__box">
+        <div className="info">
+          <h3>{event.eventName}</h3>
+          <div className="details">
+            <div className="time">
+              <span>Time: </span>
+              {event.time}
+            </div>
+            <div className="location">
+              <span>Location: </span>
+              {event.location}
+            </div>
+          </div>
+        </div>
+        <div className="description">
+          <span>Notes: </span>
+          {event.desc}
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Event
+export default Event;

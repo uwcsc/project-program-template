@@ -1,37 +1,23 @@
 import React from "react";
-import { useState } from "react";
+import {getEvents} from './AddEvent'
 import "./EventList.css";
-import AddEvent from "./AddEvent";
-import NavBar from "../../components/navbar/NavBar";
-
+import Event from './Event'
 
 function EventList() {
-  const [eventList, addToEventList] = useState(["event", "test"]);
-  const [eventDetails, toggleEventDetails] = useState(false);
+  const events = getEvents();
 
-  const addEvent = () => {
-    toggleEventDetails(!eventDetails);
-  };
+  const getEventList = () => {
+    events.map((event) => {
+      <Event event={event}/>
+    })
+  }
 
-  // when they submit event details, send to database, and then when I render it looks for the name in database
-
-  return (
-    <div className="event-list">
-      <NavBar />
-      <h1>Upcoming Events</h1>
-      <div className="buttons">
-        <button className="add-event" onClick={addEvent}>
-          Add Event
-        </button>
-        {eventDetails ? <AddEvent /> : <></>}
-      </div>
-      <ul>
-        {eventList.map((event) => (
-          <li>{event}</li>
-        ))}
-      </ul>
-    </div>
-  );
+  return events.map((event) => {
+      return (<div>
+        <Event event={event}/>
+      </div>)
+    })
+  ;
 }
 
 export default EventList;

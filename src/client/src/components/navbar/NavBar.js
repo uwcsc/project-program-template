@@ -21,6 +21,9 @@ export default function NavBar() {
         </NavLogo>
         <Bars />
         <NavMenu>
+          <NavLink to="/myevents" activeStyle>
+            My Events
+          </NavLink>
           <NavLink to="/eventlist" activeStyle>
             Event List
           </NavLink>

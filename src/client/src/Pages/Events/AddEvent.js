@@ -1,61 +1,75 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 //import AdapterDateFns from '@mui/lab/AdapterDateFns';
 //import LocalizationProvider from '@mui/lab/LocalizationProvider';
 //import { TimePicker } from "@mui/lab";
 
+const eventList = [{ 
+  eventName: "Study Session",
+  time: "12:30",
+  location: "MC 1080",
+  desc: "Come study Math "
+}, {
+  eventName: "Basketball Game",
+  time: "4:30",
+  location: "PAC",
+  desc: "Intramural basketball game"
+}];
+
+export const getEvents = () => {
+  return eventList;
+};
+
 function AddEvent() {
-  const eventList = [];
+  const navigate = useNavigate();
 
-  const [eventName,setEventName] = useState("");
-  const [time, setTime] = useState();
-  const [details, setDetails] = useState("");
+  const 
 
-  const handleSubmit = (target) => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     eventList.push({
-      eventName: target.eventName,
-      time: target.time,
-      details: target.details,
+      eventName: e.target.elements.eventname,
+      time: e.target.elements.time,
+      location: e.target.elements.location,
+      desc: e.target.elements.description,
     });
+    navigate("/eventlist");
   };
 
   return (
     <div className="addevent-container">
-      <ul>
-        {eventList.map}
-      </ul>
+      <div>Enter event details</div>
       <form onSubmit={handleSubmit}>
-        <div className="inner-form">
-          <div>Enter event details</div>
-          <div className="form-group">
-            <label htmlFor="event-name">Event: </label>
-            <input
-              type="text"
-              value={eventName}
-              placeholder="Give your an event a name!"
-              onChange={({ target }) => setEventName(target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="time">Time: </label>
-            <input
-              type="text"
-              value={time}
-              placeholder="What time is your event?"
-              onChange={({ target }) => setTime(target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="Details">Details: </label>
-            <input
-              type="text"
-              value={details}
-              placeholder="Details"
-              onChange={({ target }) => setDetails(target.value)}
-            />
-          </div>
-          <input type="submit" value="add-event" />
-        </div>
+        <label>Event Title</label>
+        <input
+          type="text"
+          name="eventname"
+          placeholder="Give your an event a name!"
+          required
+        ></input>
+        <label>Time</label>
+        <input
+          type="text"
+          name="time"
+          placeholder="What time is your event?"
+          required
+        ></input>
+        <label>Location</label>
+        <input
+          type="text"
+          name="location"
+          placeholder="What time is your event?"
+          required
+        ></input>
+        <label>Description</label>
+        <input
+          type="text"
+          name="description"
+          placeholder="Add any additional notes"
+          required
+        ></input>
+        <button>Add Your Event</button>
       </form>
     </div>
   );
