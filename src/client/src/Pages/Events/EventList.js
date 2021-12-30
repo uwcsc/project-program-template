@@ -1,11 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import "./EventList.css";
-import Event from "./Event";
 import AddEvent from "./AddEvent";
-import Home from "../Home";
-import { render } from "react-dom";
-import { Link } from "react-router-dom";
+import NavBar from "../../components/navbar/NavBar";
+
 
 function EventList() {
   const [eventList, addToEventList] = useState(["event", "test"]);
@@ -19,6 +17,7 @@ function EventList() {
 
   return (
     <div className="event-list">
+      <NavBar />
       <h1>Upcoming Events</h1>
       <div className="buttons">
         <button className="add-event" onClick={addEvent}>

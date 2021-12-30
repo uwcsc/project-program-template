@@ -1,3 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Sora', sans-serif;
+}
+html {
+  font-size: 16px;
+}
+
+input {
+  font-size: 14px;
+}
+
+body {
+  line-height: 1.4;
+  color: #333333;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #777;
+}
+
+input {
+  border: 1px solid #eeeeee;
+  padding: 12px;
+  outline: none;
+  border-radius: 7px;
+}
+
+input:hover {
+  background: #b4b7e2;
+  transition: 0.3s;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px;
+  background: #dfd10c;
+  border: none;
+  color: #333333;
+  font-size: 16px;
+  transition: background .3s ease;
+}
+
+button:hover {
+  background: #ccc125;
+}
+
+button:disabled {
+  cursor: default;
+  background: #7c5cbf94;
+}
+
+/* Join Page Styles */
+
+.centered-form {
+  background: #2c2591;
+  width: 100vw;
+  height: 100vh;   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-form__box {
+  box-shadow: 0px 0px 17px 1px #1D1F26;
+  background: #F7F7FA;
+  padding: 24px;
+  width: 450px;
+}
+
+.centered-form__box span {
+  color: #2c2591;
+}
+
+.centered-form button {
+  width: 100%;
+}
+
+.centered-form input {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+
+
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -72,3 +170,4 @@
   background-color: hsl(56, 93%, 73%);
   cursor: pointer;
 }
+*/
