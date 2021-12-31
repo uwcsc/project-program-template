@@ -35,21 +35,8 @@ const eList = [
   }
 ]
 
-router.get("/api", (req, res) => {
-  res.send(eList)
-});
-
-router.post('/api', (req,res) => {
-  eList.push(req.body)
-  console.log(req)
-  res.send(req)
-  // console.log(req)
-  alert(req.body)
+router.get('/allevents', (req, res) => {
+  res.send({events: eList})
 })
-
-router.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../client/build"));
-});
-
 
 export default router

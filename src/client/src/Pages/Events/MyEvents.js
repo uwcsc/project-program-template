@@ -1,13 +1,15 @@
-import React from 'react'
-import NavBar from '../../components/navbar/NavBar'
+import React, {Component} from "react";
+import NavBar from "../../components/navbar/NavBar";
 
-function MyEvents() {
-  return (
-    <div>
-      <NavBar />
-      Hello
-    </div>
-  )
+class MyEvents extends Component {
+  render() {
+    return (
+      <div>
+        <NavBar />
+        Hello
+      </div>
+    );
+  }
 }
 
-export default MyEvents
+export default MyEvents;

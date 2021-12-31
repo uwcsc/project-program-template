@@ -4,36 +4,33 @@ import { useNavigate } from "react-router-dom";
 import "./Events.css";
 import EventList from "./EventList";
 import NavBar from "../../components/navbar/NavBar";
-import { getEvents, addEvent } from './events-api-calls/calls'
+import { getEvents, addEvent } from "./events-api-calls/calls";
 
 function Events() {
   // Get current user's events
-  const [eventList, setUserEvents] = useState(null)
-  const [eventToAdd, setEventToAdd] = useState('')
-
-  useEffect(async () => {
-    const events = await getEvents()
-    return setUserEvents(events)
-  }, [])
-
+  const [eventList, setUserEvents] = useState(null);
+  const [eventToAdd, setEventToAdd] = useState("");
+  const [loading, setLoading] = useState(false)
   const [showAddEvent, toggleAddEvent] = useState(false);
+  
+  useEffect(async () => {
+    setLoading(true)
+    const response = await fetch("/allEvents");
+    const body = await response.json();
+    if (response.status !== 200) {
+      throw Error(body.error);
+    }
+    console.log(body)
+    setUserEvents(body.events)
+    setLoading(false)
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     //Validate and sanitize this data before pushing to db
-    console.log(e.target.value)
-    setEventToAdd(e.target.value)
 
-    addEvent(eventToAdd)
-    setEventToAdd('')
 
-    // eventList.push({
-    //   eventName: e.target.elements.eventname.value,
-    //   time: e.target.elements.time.value,
-    //   location: e.target.elements.location.value,
-    //   desc: e.target.elements.description.value,
-    // });
     toggleAddEvent(false);
   };
 
@@ -98,8 +95,3 @@ function Events() {
 }
 
 export default Events;
-
-// export default {
-//   Events,
-//   getEvents
-// }
