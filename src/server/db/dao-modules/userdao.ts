@@ -148,7 +148,7 @@ export const hasUser = async (username: string): Promise<boolean> => {
  */
 export const findMatchingUsers = async (searchString: string): Promise<userSchema[]> => {
 	const db = await getDb();
-	const query = { username: { $regex: searchString }, $options: "i" };
+	const query = { username: { $regex: searchString , $options: "i" }};
 
 	return (await db.collection("users").find(query)).toArray() as unknown as userSchema[];
 };

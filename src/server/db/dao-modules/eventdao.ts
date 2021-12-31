@@ -130,7 +130,7 @@ export const hasEvent = async (eventId: ObjectId): Promise<boolean> => {
  */
 export const findMatchingEvents = async (searchString: string): Promise<eventSchema[]> => {
 	const db = await getDb();
-	const query = { name: { $regex: searchString }, $options: "i" };
+	const query = { name: { $regex: searchString, $options: "i" }};
 
 	return (await db.collection("events").find(query)).toArray() as unknown as eventSchema[];
 };

@@ -229,7 +229,7 @@ var findMatchingUsers = function (searchString) { return __awaiter(void 0, void 
             case 0: return [4 /*yield*/, (0, conn_1.getDb)()];
             case 1:
                 db = _a.sent();
-                query = { username: { $regex: searchString }, $options: "i" };
+                query = { username: { $regex: searchString, $options: "i" } };
                 return [4 /*yield*/, db.collection("users").find(query)];
             case 2: return [2 /*return*/, (_a.sent()).toArray()];
         }
