@@ -7,6 +7,7 @@ import "./App.css";
 // window.React2 = require('react');
 // console.log(window.React1 === window.React2);
 
+
 export default function App() {
   const navigate = useNavigate();
 
@@ -21,8 +22,8 @@ export default function App() {
  
     //access database and see if user and password exist and match
     if (
-      e.target.elements.username.value !== admin.username ||
-      e.target.elements.password.value !== admin.password
+      e.target.elements.username.value.trim() !== admin.username ||
+      e.target.elements.password.value.trim() !== admin.password
     ) {
       return alert("Invalid username or password");
     }

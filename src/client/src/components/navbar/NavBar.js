@@ -15,7 +15,7 @@ export default function NavBar() {
   return (
     <>
       <Nav className="nav">
-        <NavLogo className="nav-logo" to="/">
+        <NavLogo className="nav-logo" to="/home">
           <FontAwesomeIcon className="icon" icon={faMoon} />
           Good Night Out
         </NavLogo>

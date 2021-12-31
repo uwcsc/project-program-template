@@ -4,6 +4,8 @@
   border: 1px solid black;
   position: relative;
   overflow: hidden;
+  background-color: rgb(188, 215, 255);
+  border-radius: 10px;
 }
 
 .event-container__box {
@@ -13,6 +15,7 @@
 .info {
   display: inline-block;
   width: 20%;
+  margin-top: 10px;
 }
 
 .description {

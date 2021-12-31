@@ -41,8 +41,10 @@ header {
   outline: none;
   border-radius: 7px;
   margin-right: 30px;
-  width: 300px
+  width: 300px;
+  margin-top: 10px;
 }
+
 
 .form__description{
   margin-right: 10px;

@@ -1,24 +1,39 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Events.css";
 import EventList from "./EventList";
 import NavBar from "../../components/navbar/NavBar";
+import { getEvents, addEvent } from './events-api-calls/calls'
 
 function Events() {
-  const [addEvent, toggleAddEvent] = useState(false);
+  // Get current user's events
+  const [eventList, setUserEvents] = useState(null)
+  const [eventToAdd, setEventToAdd] = useState('')
+
+  useEffect(async () => {
+    const events = await getEvents()
+    return setUserEvents(events)
+  }, [])
+
+  const [showAddEvent, toggleAddEvent] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     //Validate and sanitize this data before pushing to db
+    console.log(e.target.value)
+    setEventToAdd(e.target.value)
 
-    eventList.push({
-      eventName: e.target.elements.eventname.value,
-      time: e.target.elements.time.value,
-      location: e.target.elements.location.value,
-      desc: e.target.elements.description.value,
-    });
+    addEvent(eventToAdd)
+    setEventToAdd('')
+
+    // eventList.push({
+    //   eventName: e.target.elements.eventname.value,
+    //   time: e.target.elements.time.value,
+    //   location: e.target.elements.location.value,
+    //   desc: e.target.elements.description.value,
+    // });
     toggleAddEvent(false);
   };
 
@@ -31,13 +46,13 @@ function Events() {
       <div class="toolbar">
         <button
           class="add-event"
-          onClick={() => toggleAddEvent(!addEvent)}
-          disabled={addEvent ? "disabled" : ""}
+          onClick={() => toggleAddEvent(!showAddEvent)}
+          disabled={showAddEvent ? "disabled" : ""}
         >
           Add Event
         </button>
       </div>
-      {addEvent && (
+      {showAddEvent && (
         <div className="addevent-container">
           <div>Enter event details</div>
           <form class="addevent-form" onSubmit={handleSubmit}>
@@ -81,21 +96,6 @@ function Events() {
     </div>
   );
 }
-
-const eventList = [
-  {
-    eventName: "Study Session",
-    time: "12:30",
-    location: "MC 1080",
-    desc: "Come study Math ",
-  },
-  {
-    eventName: "Basketball Game",
-    time: "4:30",
-    location: "PAC",
-    desc: "Intramural basketball game",
-  },
-];
 
 export default Events;
 
