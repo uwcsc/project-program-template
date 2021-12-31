@@ -1,0 +1,27 @@
+{
+  "name": "project-program-template",
+  "version": "1.0.0",
+  "description": "This is a project that is part of the S21 UWaterloo CSC x DSC Project Program!",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc -p . && node dist/test.js",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanLin11/Good-Night-Out.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyanLin11/Good-Night-Out/issues"
+  },
+  "homepage": "https://github.com/RyanLin11/Good-Night-Out#readme"
+}
