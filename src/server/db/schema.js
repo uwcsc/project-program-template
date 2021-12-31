@@ -3,8 +3,8 @@
 exports.__esModule = true;
 exports.dummyEvent = exports.dummyUser = void 0;
 /**
- * A dummy user for testing. Holds only the required fields.
- */
+* A dummy user for testing. Holds only the required fields.
+*/
 exports.dummyUser = {
     firstname: "jopsse",
     lastname: "waa",
@@ -12,8 +12,8 @@ exports.dummyUser = {
     email: "why@gmai.us"
 };
 /**
- * A dummy event for testing. Holds only the required fields.
- */
+* A dummy event for testing. Holds only the required fields.
+*/
 exports.dummyEvent = {
     name: "cool",
     date: new Date(),

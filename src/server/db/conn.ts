@@ -1,5 +1,4 @@
 import { Db, MongoClient } from "mongodb";
-
 const dbUrl = process.env.ATLAS_URI;
 const client = new MongoClient(dbUrl);
 let workingDb;
