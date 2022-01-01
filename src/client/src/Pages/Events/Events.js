@@ -10,26 +10,47 @@ function Events() {
   // Get current user's events
   const [eventList, setUserEvents] = useState(null);
   const [eventToAdd, setEventToAdd] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [showAddEvent, toggleAddEvent] = useState(false);
-  
+
   useEffect(async () => {
-    setLoading(true)
+    setLoading(true);
     const response = await fetch("/allEvents");
     const body = await response.json();
     if (response.status !== 200) {
       throw Error(body.error);
     }
-    console.log(body)
-    setUserEvents(body.events)
-    setLoading(false)
+    setUserEvents(body.events);
+    setLoading(false);
   }, []);
 
-  const handleSubmit = (e) => {
+  const addEvent = async (event) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(event),
+    };
+    fetch("/allevents", requestOptions)
+      .then((response) => response.json())
+      .then((data) => this.setState({ postId: data.id }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Validate and sanitize this data before pushing to db
 
+    const event = {
+      eventName: e.target.elements.eventname.value,
+      date: new Date(),
+      location: e.target.elements.location.value,
+      isPublic: e.target.elements.isPublic.value,
+      desc: e.target.elements.description.value,
+      participants: [e.target.elements.userid.value]
+    }
+
+    await addEvent(event)
+    window.location.reload()
 
     toggleAddEvent(false);
   };
