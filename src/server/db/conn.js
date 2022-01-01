@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
+import { mongoose } from "mongoose";
 
 const dbUri = process.env.ATLAS_URI;
-const client = new MongoClient(dbUri);
 let workingDb;
 
 export const connectToServer = async () => {
