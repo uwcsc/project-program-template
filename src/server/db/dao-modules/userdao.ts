@@ -1,4 +1,4 @@
-import { ObjectId } from "bson";
+import {ObjectId} from "bson";
 import { getDb } from "../conn";
 import { userSchema, eventSchema, dummyUser, dummyEvent } from "../schema";
 

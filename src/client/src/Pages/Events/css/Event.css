@@ -20,9 +20,6 @@
 }
 
 .description {
-  float: right;
-  margin-left: 23%;
-  position: absolute;
   display: flex;
 }
 
@@ -30,3 +27,12 @@
   margin-top: 0%;
 }
 
+.event-info {
+  display: block;
+  position: relative;
+}
+
+.participants {
+  bottom: 0px;
+  margin-bottom: 0%;
+}

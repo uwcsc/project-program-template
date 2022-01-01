@@ -12,13 +12,17 @@ eventRoutes.route("/events/").get(async function(req, res) {
 
 eventRoutes.route("/events/:id").get(async function(req, res) {
     await db.connectToServer();
-    const event = await db.getEvent(req.params.id);
+    const event = await db.getEvent(ObjectId(req.params.id));
     res.json(event);
+    
 });
 
 eventRoutes.route("/events/add").post(async function(req, res) {
     await db.connectToServer();
-    db.addBasicEvent(req.body.name, req.body.date, true);
+    req.body.participants = req.body.participants.split(',').map((participant) => {
+      return participant.trim()
+    })
+    db.addBasicEvent(req.body.name, req.body.date, req.body.participants, true);
 });
 
 eventRoutes.route("/events/:id").delete(async function(req, res) {

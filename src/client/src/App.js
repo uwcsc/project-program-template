@@ -31,6 +31,16 @@ class App extends Component {
     return body;
   };
 
+  login = async () => {
+    const response = await fetch('/users/login/')
+    const body = await response.json()
+
+    if (response.status !== 200) {
+      throw Error(body.error)
+    }
+    return body
+  }
+
   render() {
     const { navigate } = this.props;
 
@@ -38,7 +48,7 @@ class App extends Component {
       e.preventDefault();
 
       //authenticate this user to see if we should log them in
-      const currentUser = this.getCurrentUser()
+      const currentUser = this.login()
         .then((res) => {
           this.setState({ currentUser: res.currentUser });
         })
@@ -72,8 +82,8 @@ class App extends Component {
                 required
               ></input>
               <label>Password</label>
-              <input
-                type="text"
+              <input 
+                type="password"
                 name="password"
                 placeholder="Enter your password"
                 required

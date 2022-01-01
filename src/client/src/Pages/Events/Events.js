@@ -1,10 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Events.css";
+import "./css/Events.css";
 import EventList from "./EventList";
 import NavBar from "../../components/navbar/NavBar";
-import { getEvents, addEvent } from "./events-api-calls/calls";
+import { FaSearch } from 'react-icons/fa'
+import api from './events-api-calls/calls.js'
 
 function Events() {
   // Get current user's events
@@ -15,44 +16,39 @@ function Events() {
 
   useEffect(async () => {
     setLoading(true);
-    const response = await fetch("/allEvents");
+    const response = await fetch("/events/");
     const body = await response.json();
     if (response.status !== 200) {
-      throw Error(body.error);
+      throw Error(body);
     }
-    setUserEvents(body.events);
+    setUserEvents(body);
     setLoading(false);
   }, []);
-
-  const addEvent = async (event) => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(event),
-    };
-    fetch("/allevents", requestOptions)
-      .then((response) => response.json())
-      .then((data) => this.setState({ postId: data.id }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Validate and sanitize this data before pushing to db
-
+    console.log(e.target.elements.isPublic.value)
     const event = {
-      eventName: e.target.elements.eventname.value,
-      date: new Date(),
+      name: e.target.elements.name.value,
+      date: e.target.elements.date.value,
       location: e.target.elements.location.value,
-      isPublic: e.target.elements.isPublic.value,
-      desc: e.target.elements.description.value,
-      participants: [e.target.elements.userid.value]
-    }
+      isPublic: e.target.elements.isPublic.value === "on",
+      participants: e.target.elements.participants.value
+    };
 
-    await addEvent(event)
-    window.location.reload()
+    await api.addEvent(event);
+    //window.location.reload();
 
     toggleAddEvent(false);
+  };
+
+  const search = async (e) => {
+    e.preventDefault()
+
+    await api.searchEvents(e.target.elements.query.value)
+    window.location.reload()
   };
 
   return (
@@ -62,6 +58,14 @@ function Events() {
         <h1>Upcoming Events</h1>
       </header>
       <div class="toolbar">
+        <form class="search" onSubmit={search}>
+          <input
+            type="search"
+            name="query"
+            placeholder="Look for an Event"
+          ></input>
+          <button><FaSearch /></button>
+        </form>
         <button
           class="add-event"
           onClick={() => toggleAddEvent(!showAddEvent)}
@@ -74,17 +78,17 @@ function Events() {
         <div className="addevent-container">
           <div>Enter event details</div>
           <form class="addevent-form" onSubmit={handleSubmit}>
-            <label>Event Title</label>
+            <label>Event Name</label>
             <input
               type="text"
-              name="eventname"
+              name="name"
               placeholder="Give your an event a name!"
               required
             ></input>
-            <label>Time</label>
+            <label>Date</label>
             <input
-              type="text"
-              name="time"
+              type="datetime-local"
+              name="date"
               placeholder="What time is your event?"
               required
             ></input>
@@ -92,15 +96,23 @@ function Events() {
             <input
               type="text"
               name="location"
-              placeholder="What time is your event?"
+              placeholder="Where is your event?"
+              required
+            ></input>
+            <label class="checkbox">Public? (T/F)</label>
+            <input
+              class="checkbox"
+              type="checkbox"
+              name="isPublic"
+              placeholder="Do you want your event to be public?"
               required
             ></input>
             <div class="form__description">
-              <label>Description</label>
+              <label>Participants (separated by commas)</label>
               <input
                 type="text"
-                name="description"
-                placeholder="Add any additional notes"
+                name="participants"
+                placeholder="Who's coming?"
                 required
               ></input>
             </div>

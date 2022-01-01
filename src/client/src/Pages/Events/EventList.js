@@ -1,14 +1,16 @@
 import React from "react";
-import "./EventList.css";
+import "./css/EventList.css";
 import Event from "./Event";
 
 function EventList({events}) {
   if(!events){
-    return <></>
+    return <div>Currently, there are no events.  Create One!</div>
   }
 
-  events = events.reverse()
-  return events.map((event) => {
+  const publicEvents = events.filter((event) => event.is_public)
+  console.log(publicEvents.reverse())
+
+  return publicEvents.reverse().map((event) => {
     return (
       <div>
         <Event event={event} />

@@ -38,7 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.getDb = exports.connectToServer = void 0;
 var mongodb_1 = require("mongodb");
-var dbUrl = process.env.ATLAS_URI;
+// var dbUrl = process.env.ATLAS_URI;
+var dbUrl = 'mongodb+srv://dbAdmin:hqnaJjqmAsVsJIHX@night-night.lpsjz.mongodb.net/night-night?retryWrites=true&w=majority'
 var client = new mongodb_1.MongoClient(dbUrl);
 var workingDb;
 var connectToServer = function () { return __awaiter(void 0, void 0, void 0, function () {

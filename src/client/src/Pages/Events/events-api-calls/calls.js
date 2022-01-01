@@ -1,20 +1,19 @@
-export function getEvents() {
-  try {
-    return fetch("/api").then((data) => data.json());
-  } catch (e) {
-    alert(e);
-  }
-}
-
-export function addEvent(event) {
-  const reqOptions = {
+const addEvent = async (event) => {
+  const requestOptions = {
     method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(event),
   };
-  fetch("http:localhost:3000/api", reqOptions)
+  fetch("/events/add", requestOptions)
     .then((response) => response.json())
-    // .then((data) => this.setState({ postId: data.id }));
+    .then((data) => this.setState({ postId: data.id }));
+};
+
+const searchEvents = async (options) => {
+  //Need a router that searches for an event by name
+}
+
+export default {
+  addEvent,
+  searchEvents
 }

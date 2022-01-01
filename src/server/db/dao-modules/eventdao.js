@@ -90,7 +90,7 @@ exports.addEvent = addEvent;
  * @param isPublic whether the event is public or not.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-var addBasicEvent = function (name, date, isPublic) { return __awaiter(void 0, void 0, void 0, function () {
+var addBasicEvent = function (name, date, participants, isPublic) { return __awaiter(void 0, void 0, void 0, function () {
     var db, newEvent;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -102,7 +102,7 @@ var addBasicEvent = function (name, date, isPublic) { return __awaiter(void 0, v
                     name: name,
                     date: date,
                     is_public: isPublic,
-                    participants: []
+                    participants
                 };
                 return [4 /*yield*/, db.collection("events").insertOne(newEvent)];
             case 2: return [2 /*return*/, (_a.sent()).acknowledged];

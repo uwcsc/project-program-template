@@ -1,26 +1,34 @@
 import React from "react";
-import "./Event.css";
+import "./css/Event.css";
 
-function Event({ event }) {
+function Event({event}) {
   return (
     <div className="event-container">
       <div className="event-container__box">
         <div className="info">
-          <h3>{event.eventName}</h3>
+          <h3>{event.name}</h3>
           <div className="details">
             <div className="time">
-              <span>Time: </span>
-              {event.time}
+              <span>Date: </span>
+              {event.date}
             </div>
-            <div className="location">
+            {event.location && <div className="location">
               <span>Location: </span>
               {event.location}
-            </div>
+            </div>}
           </div>
         </div>
-        <div className="description">
-          <span>Notes: </span>
-          {event.desc}
+        <div className="event-info">
+          <div className="description">
+            Notes: <span>{event.desc}</span>
+          </div>
+          {event.participants === [] &&
+          <div className="participants">
+            Participants:
+            {event.participants.map((participant) => {
+              return <span>{participant}</span>;
+            })}
+          </div>}
         </div>
       </div>
     </div>

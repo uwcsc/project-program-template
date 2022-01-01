@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/navbar/NavBar";
-import './Events.css'
+import './css/Events.css'
 
 function MyEvents() {
   const [myEvents, setMyEvents] = useState(null)
