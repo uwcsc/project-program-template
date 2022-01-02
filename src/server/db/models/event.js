@@ -8,7 +8,7 @@ const user = require("./user");
  * Location is optional—can be updated on a later date.
  * Participants must be provided, but can be an empty list.
  */
-export const eventSchema = new Schema({
+const eventSchema = new Schema({
 	name: {
 		type: String,
 		required: "A name must be specified!",
@@ -36,12 +36,12 @@ eventSchema.virtual("details").get(function () {
 	return `${this.name} : public? ${this.is_public} -- ${description || "no description provided"}`;
 });
 
-export const Event = mongoose.model("Event", eventSchema);
+// export const Event = mongoose.model("Event", eventSchema);
 
 /**
  * A dummy event for testing. Holds only the required fields.
  */
-export const dummyEvent = {
+const dummyEvent = {
 	name: "cool",
 	date: new Date(),
 	is_public: true,
@@ -49,5 +49,5 @@ export const dummyEvent = {
 };
 
 exports.eventSchema = eventSchema;
-exports.Event = Event;
 exports.dummyEvent = dummyEvent;
+// exports.Event = Event;

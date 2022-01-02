@@ -1,6 +1,5 @@
 import { ObjectId } from "bson";
 import { getDb } from "../conn";
-import { eventSchema, dummyEvent } from "../schema";
 
 /**
  * Adds a new event to the mongoDB database.
@@ -35,7 +34,11 @@ export const addEvent = async (event: eventSchema): Promise<boolean> => {
  * @param isPublic whether the event is public or not.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const addBasicEvent = async (name: string, date: Date, isPublic: boolean): Promise<boolean> => {
+export const addBasicEvent = async (
+	name: string,
+	date: Date,
+	isPublic: boolean
+): Promise<boolean> => {
 	const db = await getDb();
 	const newEvent = {
 		_id: new ObjectId(),
@@ -62,7 +65,11 @@ export const addBasicEvent = async (name: string, date: Date, isPublic: boolean)
  * @param value the new value for the field.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const updateEvent = async (eventId: ObjectId, field: string, value: any): Promise<boolean> => {
+export const updateEvent = async (
+	eventId: ObjectId,
+	field: string,
+	value: any
+): Promise<boolean> => {
 	const db = await getDb();
 	const query = { _id: eventId };
 
