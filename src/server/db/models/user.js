@@ -9,21 +9,32 @@ export const userSchema = mongoose.Schema({
 	firstname: {
 		type: String,
 		required: "A first name is required!",
+		trim: true,
 	},
 	lastname: {
 		type: String,
 		required: "A last name is required!",
+		trim: true,
 	},
 	username: {
 		type: String,
 		required: "A username must be provided!",
+		trim: true,
 	},
 	email: {
 		type: String,
 		required: "An email must be provided!",
+		trim: true,
+		match: ".+@.+",
 	},
-	about: String,
-	from: String,
+	about: {
+		type: String,
+		trim: true,
+	},
+	from: {
+		type: String,
+		trim: true,
+	},
 	interests: [String],
 });
 

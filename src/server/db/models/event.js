@@ -12,15 +12,23 @@ export const eventSchema = mongoose.Schema({
 	name: {
 		type: String,
 		required: "A name must be specified!",
+		trim: true,
 	},
 	is_public: {
 		type: Boolean,
 		required: "Visibility settings must be specified!",
+		default: true,
 	},
 	date: Date,
 	participants: [userSchema],
-	description: String,
-	location: String,
+	description: {
+		type: String,
+		trim: true,
+	},
+	location: {
+		type: String,
+		trim: true,
+	},
 });
 
 // for debug, will not be stored on db, prints out event details for debug
