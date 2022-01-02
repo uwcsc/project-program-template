@@ -11,7 +11,7 @@ app.use(require("./routes/events"));
 app.use(require("./routes/users"));
 const db = require("./db/dao");
 
-app.listen(port, async() => {
-    console.log(`Server is now running on port ${port}`);
-    await db.connectToServer();
-})
+app.listen(port, async () => {
+	console.log(`Server is now running on port ${port}`);
+	await db.connectToDatabase();
+});
