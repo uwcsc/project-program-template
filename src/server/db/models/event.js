@@ -1,5 +1,5 @@
-import { mongoose } from "mongoose";
-import { userSchema } from "./user";
+const mongoose = require("mongoose");
+const user = require("./user");
 
 /**
  * The default schema for an event object.
@@ -8,7 +8,7 @@ import { userSchema } from "./user";
  * Location is optional—can be updated on a later date.
  * Participants must be provided, but can be an empty list.
  */
-export const eventSchema = mongoose.Schema({
+export const eventSchema = new Schema({
 	name: {
 		type: String,
 		required: "A name must be specified!",
@@ -20,7 +20,7 @@ export const eventSchema = mongoose.Schema({
 		default: true,
 	},
 	date: Date,
-	participants: [userSchema],
+	participants: [user.userSchema],
 	description: {
 		type: String,
 		trim: true,
@@ -47,3 +47,7 @@ export const dummyEvent = {
 	is_public: true,
 	participants: [],
 };
+
+exports.eventSchema = eventSchema;
+exports.Event = Event;
+exports.dummyEvent = dummyEvent;

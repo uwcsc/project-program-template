@@ -1,4 +1,4 @@
-import { mongoose } from "mongoose";
+const mongoose = require("mongoose");
 
 const dbUri = process.env.ATLAS_URI;
 let workingDb;
@@ -13,7 +13,7 @@ let workingDb;
  *
  * @returns a promise that will resolve to the db object.
  */
-export const connectToDatabase = async () => {
+const connectToDatabase = async () => {
 	try {
 		const db = await mongoose.connect(dbUri);
 
@@ -39,7 +39,7 @@ export const connectToDatabase = async () => {
  *
  * @returns a promise with the current working db, if initialized.
  */
-export const getDb = async () => {
+const getDb = async () => {
 	return new Promise((resolve, reject) => {
 		if (workingDb) {
 			resolve(workingDb);
@@ -48,3 +48,6 @@ export const getDb = async () => {
 		}
 	});
 };
+
+exports.connectToDatabase = connectToDatabase;
+exports.getDb = getDb;

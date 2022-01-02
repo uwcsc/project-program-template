@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 /**
  * The default database schema for a user.
  *
  * Note that the only required fields are the first name, last name, username, and email.
  */
-export const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
 	firstname: {
 		type: String,
 		required: "A first name is required!",
@@ -43,14 +43,18 @@ userSchema.virtual("details").get(function () {
 	return `${this.username} - ${this.firstname} ${this.lastname}`;
 });
 
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 /**
  * A dummy user for testing. Holds only the required fields.
  */
-export const dummyUser = {
+const dummyUser = {
 	firstname: "jopsse",
 	lastname: "waa",
 	username: "the_slayer_xxx",
 	email: "why@gmai.us",
 };
+
+exports.userSchema = userSchema;
+exports.dummyUser = dummyUser;
+exports.User = User;
