@@ -25,7 +25,6 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: "An email must be provided!",
 		trim: true,
-		match: ".+@.+",
 	},
 	about: {
 		type: String,

@@ -22,6 +22,8 @@ const addUser = async (userObj) => {
 
 		return true;
 	} catch (err) {
+		console.error(err);
+
 		return false;
 	}
 };
@@ -53,6 +55,8 @@ const addBasicUser = async (firstname, lastname, username, email) => {
 
 		return true;
 	} catch (err) {
+		console.error(err);
+
 		return false;
 	}
 };
