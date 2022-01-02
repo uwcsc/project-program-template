@@ -29,3 +29,13 @@ eventSchema.virtual("details").get(function () {
 });
 
 export const Event = mongoose.model("Event", eventSchema);
+
+/**
+ * A dummy event for testing. Holds only the required fields.
+ */
+export const dummyEvent = {
+	name: "cool",
+	date: new Date(),
+	is_public: true,
+	participants: [],
+};

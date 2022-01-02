@@ -33,3 +33,13 @@ userSchema.virtual("details").get(function () {
 });
 
 export const User = mongoose.model("User", userSchema);
+
+/**
+ * A dummy user for testing. Holds only the required fields.
+ */
+export const dummyUser = {
+	firstname: "jopsse",
+	lastname: "waa",
+	username: "the_slayer_xxx",
+	email: "why@gmai.us",
+};
