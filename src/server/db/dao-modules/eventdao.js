@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const connector = require("../conn");
+const eventDao = require("../models/event");
 
 /**
  * Adds a new event to the mongoDB database.
@@ -14,11 +13,17 @@ const connector = require("../conn");
  *
  * ! I don't know if this will update a event or create a new event. I will Update accordingly.
  */
-export const addEvent = async (event) => {
-	const db = await getDb();
-	const newEvent = { _id: new ObjectId(), ...event };
+const addEvent = async (event) => {
+	const newEvent = new eventDao.Event({ ...event });
+	try {
+		await newEvent.save();
 
-	return (await db.collection("events").insertOne(newEvent)).acknowledged;
+		return true;
+	} catch (err) {
+		console.error(err);
+
+		return false;
+	}
 };
 
 /**
@@ -30,21 +35,24 @@ export const addEvent = async (event) => {
  * Consider using {@link addEvent} if you need to add optional information for the event.
  *
  * @param name the name of the event.
- * @param date the date of the event.
  * @param isPublic whether the event is public or not.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const addBasicEvent = async (name, date, isPublic) => {
-	const db = await getDb();
-	const newEvent = {
-		_id: new ObjectId(),
+const addBasicEvent = async (name, isPublic) => {
+	const newEvent = new eventDao.Event({
 		name: name,
-		date: date,
 		is_public: isPublic,
-		participants: [],
-	};
+	});
 
-	return (await db.collection("events").insertOne(newEvent)).acknowledged;
+	try {
+		await newEvent.save();
+
+		return true;
+	} catch (err) {
+		console.error(err);
+
+		return false;
+	}
 };
 
 /**
@@ -61,17 +69,19 @@ export const addBasicEvent = async (name, date, isPublic) => {
  * @param value the new value for the field.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const updateEvent = async (eventId, field, value) => {
-	const db = await getDb();
-	const query = { _id: eventId };
+const updateEvent = async (eventId, field, value) => {
+	try {
+		const eventToUpdate = await eventDao.Event.findById(eventId).exec();
 
-	const newValues = {
-		$set: {
-			field: value,
-		},
-	};
+		eventToUpdate.field = value;
+		eventToUpdate.save();
 
-	return (await db.collection("events").updateOne(query, newValues)).acknowledged;
+		return true;
+	} catch (err) {
+		console.error(err);
+
+		return false;
+	}
 };
 
 /**
@@ -82,11 +92,16 @@ export const updateEvent = async (eventId, field, value) => {
  * @param eventId the event's `ObjectId`.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-export const deleteEvent = async (eventId) => {
-	const db = await getDb();
-	const query = { _id: eventId };
+const deleteEvent = async (eventId) => {
+	try {
+		await userDao.User.deleteOne({ _id: eventId }).exec();
 
-	return (await db.collection("events").deleteOne(query)).acknowledged;
+		return true;
+	} catch (err) {
+		console.error(err);
+
+		return false;
+	}
 };
 
 /**
@@ -95,11 +110,16 @@ export const deleteEvent = async (eventId) => {
  * @param eventId the `ObjectId` for the event.
  * @returns the event, or `null` if one cannot be found.
  */
-export const getEvent = async (eventId) => {
-	const db = await getDb();
-	const query = { _id: eventId };
+const getEvent = async (eventId) => {
+	try {
+		const desiredEvent = await eventDao.Event.findById(eventId).exec();
 
-	return await db.collection("events").findOne(query);
+		return desiredEvent;
+	} catch (err) {
+		console.error(err);
+
+		return null;
+	}
 };
 
 /**
@@ -112,7 +132,7 @@ export const getEvent = async (eventId) => {
  * @param eventId the ObjectId of this event.
  * @returns a boolean, true if the event exists and false otherwise.
  */
-export const hasEvent = async (eventId) => {
+const hasEvent = async (eventId) => {
 	return !((await getEvent(eventId)) == null);
 };
 
@@ -124,11 +144,27 @@ export const hasEvent = async (eventId) => {
  * Note that this search is case-insensitive.
  *
  * @param searchString a string containing a substring to look for in events.
- * @returns a list of `eventSchema` containing potential event matches.
+ * @returns a list of documents of type `eventSchema` containing potential event matches.
  */
-export const findMatchingEvents = async (searchString) => {
-	const db = await getDb();
-	const query = { name: { $regex: searchString, $options: "i" } };
+const findMatchingEvents = async (searchString) => {
+	try {
+		const events = await eventDao.Event.find({
+			username: { $regex: searchString, $options: "i" },
+		})
+			.limit(10)
+			.exec();
 
-	return (await db.collection("events").find(query)).toArray();
+		return events;
+	} catch (err) {
+		console.error(err);
+
+		return null;
+	}
 };
+
+exports.addEvent = addEvent;
+exports.addBasicEvent = addBasicEvent;
+exports.updateEvent = updateEvent;
+exports.getEvent = getEvent;
+exports.hasEvent = hasEvent;
+exports.findMatchingEvents = findMatchingEvents;

@@ -1,5 +1,3 @@
-const connector = require("../conn");
-const mongoose = require("mongoose");
 const userDao = require("../models/user");
 
 /**
@@ -43,7 +41,7 @@ const addUser = async (userObj) => {
  * @returns a boolean, true if this method was successful and false otherwise.
  */
 const addBasicUser = async (firstname, lastname, username, email) => {
-	const newUser = userDao.User({
+	const newUser = new userDao.User({
 		firstname: firstname,
 		lastname: lastname,
 		username: username,
@@ -102,7 +100,7 @@ const updateUser = async (username, field, value) => {
  */
 const deleteUser = async (username) => {
 	try {
-		const desiredUser = await userDao.User.deleteOne({ username: username }).exec();
+		await userDao.User.deleteOne({ username: username }).exec();
 
 		return true;
 	} catch (err) {
