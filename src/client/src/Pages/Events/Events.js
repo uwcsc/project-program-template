@@ -10,19 +10,16 @@ import api from './events-api-calls/calls.js'
 function Events() {
   // Get current user's events
   const [eventList, setUserEvents] = useState(null);
-  const [eventToAdd, setEventToAdd] = useState("");
-  const [loading, setLoading] = useState(false);
   const [showAddEvent, toggleAddEvent] = useState(false);
 
   useEffect(async () => {
-    setLoading(true);
     const response = await fetch("/events/");
     const body = await response.json();
     if (response.status !== 200) {
       throw Error(body);
     }
+    console.log({body})
     setUserEvents(body);
-    setLoading(false);
   }, []);
 
   const handleSubmit = async (e) => {

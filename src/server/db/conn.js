@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const dbUri = process.env.ATLAS_URI;
+// const dbUri = process.env.ATLAS_URI;
+const dbUri = 'mongodb+srv://dbAdmin:hqnaJjqmAsVsJIHX@night-night.lpsjz.mongodb.net/night-night?retryWrites=true&w=majority'
 let workingDb;
 
 /**
@@ -13,7 +14,7 @@ let workingDb;
  *
  * @returns a promise that will resolve to the db object.
  */
-const connectToDatabase = async () => {
+const connectToDatabase = async () => { 
 	try {
 		const db = await mongoose.connect(dbUri);
 

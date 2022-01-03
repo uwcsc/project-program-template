@@ -4,7 +4,7 @@ import api from './events-api-calls/calls.js'
 import {FaTrash} from 'react-icons/fa'
 
 function Event({event}) {
-
+  console.log(event)
   return (
     <div className="event-container">
       <div className="event-container__box">
@@ -29,7 +29,8 @@ function Event({event}) {
           <div className="participants">
             Participants: 
             {event.participants.map((participant) => {
-              return <span>{participant},</span>;
+              console.log(participant)
+              return <span>{participant.username},</span>;
             })}
           </div>}
         </div>

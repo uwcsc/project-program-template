@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/navbar/NavBar";
 import "./Profile.css";
@@ -11,16 +11,24 @@ import { FaPen } from "react-icons/fa";
 function Profile() {
   const navigate = useNavigate();
   const [editMode, toggleEditMode] = useState(false);
+  const [currentUser, setCurrentUser] = useState("");
 
-  const currentUser = {
-    name: "Administrator",
-    email: "admin@admin.com",
-    password: "admin",
-  };
+  const currentUserUsername = localStorage
+    .getItem("currentUser")
+    .padEnd(12, ".");
+  console.log(currentUserUsername);
 
-  const changetoFalse = () => {
-    toggleEditMode(!editMode);
-  };
+  useEffect(async () => {
+    const response = await fetch("/users/" + currentUserUsername + "/");
+    const body = await response.json();
+    if (response.status !== 200) {
+      throw Error(body);
+    }
+    console.log(body);
+    setCurrentUser(body);
+  }, []);
+
+  const currUsername = localStorage.getItem("currentUser");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,52 +43,48 @@ function Profile() {
     navigate("/profile");
   };
 
-  const getUserInfo = () => {
-    //get current user's info from database
-  };
-
   return (
     <>
       <NavBar />
       <div class="container">
         <div className="container__box">
-        <h1>
-          Hello, <span>{currentUser.name}</span>
-        </h1>
-        <form onSubmit={handleSubmit}>
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            placeholder={currentUser.username}
-            disabled={editMode ? "" : "disabled"}
-            required
-          ></input>
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            placeholder={currentUser.email}
-            disabled={editMode ? "" : "disabled"}
-            required
-          ></input>
-          <label>Password</label>
-          <input
-            type="text"
-            name="password"
-            placeholder={currentUser.password}
-            disabled={editMode ? "" : "disabled"}
-            required
-          ></input>
-          {editMode ? (
-            <button>Save Changes</button>
-          ) : (
-            <button onClick={() => toggleEditMode(!editMode)}>
-              <FaPen />
-              <span>Edit Profile</span>
-            </button>
-          )}
-        </form>
+          <h1>
+            Hello, <span>{currUsername}</span>
+          </h1>
+          <form class="edit-profile-form" onSubmit={handleSubmit}>
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder={currentUser.username}
+              disabled={editMode ? "" : "disabled"}
+              required
+            ></input>
+            <label>Email</label>
+            <input
+              type="text"
+              name="email"
+              placeholder={currentUser.email}
+              disabled={editMode ? "" : "disabled"}
+              required
+            ></input>
+            <label>Password</label>
+            <input
+              type="text"
+              name="password"
+              placeholder={currentUser.password}
+              disabled={editMode ? "" : "disabled"}
+              required
+            ></input>
+            {editMode ? (
+              <button>Save Changes</button>
+            ) : (
+              <button onClick={() => toggleEditMode(!editMode)}>
+                <FaPen />
+                <span>Edit Profile</span>
+              </button>
+            )}
+          </form>
         </div>
       </div>
     </>

@@ -38,9 +38,10 @@ const addEvent = async (event) => {
  * @param isPublic whether the event is public or not.
  * @returns a boolean, true if this method was successful and false otherwise.
  */
-const addBasicEvent = async (name, isPublic) => {
+const addBasicEvent = async (name, date, isPublic) => {
 	const newEvent = new eventDao.Event({
 		name: name,
+    date,
 		is_public: isPublic,
 	});
 
@@ -94,7 +95,7 @@ const updateEvent = async (eventId, field, value) => {
  */
 const deleteEvent = async (eventId) => {
 	try {
-		await userDao.User.deleteOne({ _id: eventId }).exec();
+		await eventDao.Event.deleteOne({ _id: eventId }).exec();
 
 		return true;
 	} catch (err) {
@@ -163,6 +164,7 @@ const findMatchingEvents = async (searchString) => {
 };
 
 exports.addEvent = addEvent;
+exports.deleteEvent = deleteEvent;
 exports.addBasicEvent = addBasicEvent;
 exports.updateEvent = updateEvent;
 exports.getEvent = getEvent;

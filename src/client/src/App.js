@@ -9,16 +9,32 @@ class App extends Component {
       firstname: "",
       lastname: "",
       username: "",
-      email: ""
+      email: "",
     },
   };
   // fetching the GET route from the Express server which matches the GET route from server.js
   componentDidMount() {
-    this.state.currentUser = admin
+    this.state.currentUser = admin;
   }
 
-  login = async () => {
-    const response = await fetch("/users/login/");
+  login = async (user) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    };
+    fetch("/users/login/", requestOptions)
+      .then((response) => response.json())
+      .catch((e) => {
+        return console.log(e)
+      })
+      console.log(user)
+    localStorage.setItem("currentUser", user.username)
+    return user;
+  };
+
+  signup = async () => {
+    const response = await fetch("/users/signup/");
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -27,16 +43,6 @@ class App extends Component {
     return body;
   };
 
-  signup = async () => {
-    const response = await fetch("/users/signup/")
-    const body = await response.json()
-
-    if(response.status !== 200) {
-      throw Error(body.error)
-    }
-    return body
-  }
-
   render() {
     const { navigate, login, toggleLogin } = this.props;
 
@@ -44,35 +50,24 @@ class App extends Component {
       e.preventDefault();
 
       //authenticate this user to see if we should log them in
-      const currentUser = this.login()
-        .then((res) => {
-          this.setState({ currentUser: res.currentUser });
-        })
-        .catch((err) => console.log(err));
-
-      if (
-        e.target.elements.username.value.trim() !==
-          this.state.currentUser.username ||
-        e.target.elements.password.value.trim() !==
-          this.state.currentUser.password
-      ) {
-        return alert("Invalid username or password");
-      }
-
+      const user = this.login({
+        username: e.target.elements.username.value,
+        password: e.target.elements.password.value,
+      }).catch((e) => {
+        return console.log(e);
+      });
+      this.setState({ currentUser: user });
       navigate("/home");
     };
 
     const handleSignUp = (e) => {
-      e.preventDefault()
+      e.preventDefault();
+      alert("signing in");
 
-      // check if email is already in db
+      this.signup();
 
-      // else add 
-
-
-      navigate('/home')
-
-    }
+      //navigate('/home')
+    };
 
     return login ? (
       <div class="container">
@@ -100,7 +95,12 @@ class App extends Component {
               ></input>
               <button>Login</button>
             </form>
-            <button class="toggleform__button" onClick={() => toggleLogin(!login)}>Or if you don't have an account, <span>sign up</span></button>
+            <button
+              class="toggleform__button"
+              onClick={() => toggleLogin(!login)}
+            >
+              Or if you don't have an account, <span>sign up</span>
+            </button>
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@ class App extends Component {
               <span>Good Night Out</span>
             </h1>
             <form onSubmit={handleSignUp}>
-            <label>First Name</label>
+              <label>First Name</label>
               <input
                 type="text"
                 name="firstname"
@@ -151,7 +151,12 @@ class App extends Component {
               ></input>
               <button>Sign Up</button>
             </form>
-            <button class="toggleform__button" onClick={() => toggleLogin(!login)}>Or if you already have an account, <span>log in</span></button>
+            <button
+              class="toggleform__button"
+              onClick={() => toggleLogin(!login)}
+            >
+              Or if you already have an account, <span>log in</span>
+            </button>
           </div>
         </div>
       </div>
@@ -163,7 +168,7 @@ export default function (props) {
   const navigate = useNavigate();
   const [login, toggleLogin] = useState(true);
 
-  return <App navigate={navigate} login={login} toggleLogin={toggleLogin}/>;
+  return <App navigate={navigate} login={login} toggleLogin={toggleLogin} />;
 }
 
 const admin = {
