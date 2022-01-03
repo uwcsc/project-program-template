@@ -5,11 +5,11 @@ const {ObjectId} = require('mongodb');
 const { addBasicUser, getUser } = require('../db/dao');
 const userSchema = require('../db/dao-modules/userdao.ts')
 
-// userRoutes.route("/users/signup").post(async function (req,res) {
-//   console.log("signing up")
-//   await db.connectToServer()
-//   const formattedUsername = req.body.username.padEnd(12,'.').substring(0,12)
-  
+userRoutes.route("/users/signup").post(async function (req,res) {
+  console.log("signing up")
+  await db.connectToServer()
+  const formattedUsername = req.body.username.padEnd(12,'.').substring(0,12)
+})
 //   // Can you set this up 
 //   // const newUser = new userSchema(req.body)
   
@@ -39,6 +39,15 @@ userRoutes.route("/users/login/").post(async function(req, res) {
     console.log(db_user);
     res.json(db_user);
 });
+
+userRoutes.route("/users/signup/").post(async function(req, res) {
+  await db.connectToServer();
+  // const newUser = new User(req.body)
+
+  res.status(201).send(getUser(req.params.name))
+})
+
+//delete users from database
 
 userRoutes.route("/users/:name/").get(async function(req, res) {
     await db.connectToServer();

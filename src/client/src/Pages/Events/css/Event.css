@@ -36,3 +36,22 @@
   bottom: 0px;
   margin-bottom: 0%;
 }
+
+.delete-button {
+  background-color: transparent;
+  float: right;
+  top: 70%;
+  border-radius: 5px;
+}
+
+.delete-button:hover {
+  background-color: rgb(187, 187, 187);
+}
+
+.join-event {
+  margin-top: 10px;
+  border-radius: 5px;
+  height:fit-content;
+  margin-left: 2%;
+  width: 7vw;
+}

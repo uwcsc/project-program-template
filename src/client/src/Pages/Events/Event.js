@@ -1,7 +1,10 @@
 import React from "react";
 import "./css/Event.css";
+import api from './events-api-calls/calls.js'
+import {FaTrash} from 'react-icons/fa'
 
 function Event({event}) {
+
   return (
     <div className="event-container">
       <div className="event-container__box">
@@ -22,17 +25,32 @@ function Event({event}) {
           <div className="description">
             Notes: <span>{event.desc}</span>
           </div>
-          {event.participants === [] &&
+          {event.participants !== [] &&
           <div className="participants">
-            Participants:
+            Participants: 
             {event.participants.map((participant) => {
-              return <span>{participant}</span>;
+              return <span>{participant},</span>;
             })}
           </div>}
         </div>
       </div>
+      <div class="join-delete-buttons">
+        <button className="join-event" onClick={() => api.joinEvent({eventid: event._id, user: testUser})}>
+          Join
+        </button>
+      <button class="delete-button" onClick={() => api.deleteEvent(event._id)}>
+        <FaTrash />
+      </button>
+      </div>
     </div>
   );
+}
+
+const testUser = {
+  firstname: "Jacob",
+  lastname: "I",
+  username: "jacobi3",
+  email: "jim@wat.com"
 }
 
 export default Event;

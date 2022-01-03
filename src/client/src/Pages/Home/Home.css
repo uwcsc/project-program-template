@@ -1,17 +1,32 @@
-/* span {
-  background-color: rgb(194, 191, 191);
-  border-radius: 5px;
-  padding: 4px 10px
-} */
+.home-container {
+  top: 80px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(221, 221, 221);
+  position: absolute;
+}
 
 .header {
-  height: 30vw;
   margin-top: 5%;
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 span {
   color: rgb(45, 45, 121);
-  
+  font-weight: bold;
+}
+
+.info-block {
+  padding: 40px;
+  padding-left: 60px;
+  font-size: 20px;
+}
+
+.info-block h3 {
+  text-align: center;
+}
+
+.text {
+  display: flex;
 }

@@ -39,7 +39,7 @@ function Events() {
     };
 
     await api.addEvent(event);
-    //window.location.reload();
+    window.location.reload();
 
     toggleAddEvent(false);
   };
@@ -105,7 +105,6 @@ function Events() {
               type="checkbox"
               name="isPublic"
               placeholder="Do you want your event to be public?"
-              required
             ></input>
             <div class="form__description">
               <label>Participants (separated by commas)</label>

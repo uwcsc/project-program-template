@@ -10,6 +10,7 @@ eventRoutes.route("/events/").get(async function(req, res) {
     res.json(events);
 });
 
+//Do we need this?
 eventRoutes.route("/events/:id").get(async function(req, res) {
     await db.connectToServer();
     const event = await db.getEvent(ObjectId(req.params.id));
@@ -23,6 +24,7 @@ eventRoutes.route("/events/add").post(async function(req, res) {
       return participant.trim()
     })
     db.addBasicEvent(req.body.name, req.body.date, req.body.participants, true);
+
 });
 
 eventRoutes.route("/events/:id").delete(async function(req, res) {
@@ -37,8 +39,17 @@ eventRoutes.route("/events/:id").delete(async function(req, res) {
     }
 })
 
-eventRoutes.route("/event/:id/update").get(async function(req, res) {
-    await db.connectToServer();
-})
+//update event route
+
+
+// eventRoutes.route("/events/:userid").get(async function(req, res) {
+//   await db.connectToServer()
+//   const userEvenst = db.findMatchingEvents()
+// })
+
+// eventRoutes.route("/event/:id/update").patch(async function(req, res) {
+//   await db.connectToServer()
+//   const event = await db.getEvent(ObjectId(req.params._id))
+// })
 
 module.exports = eventRoutes;

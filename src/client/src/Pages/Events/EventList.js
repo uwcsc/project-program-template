@@ -7,10 +7,13 @@ function EventList({events}) {
     return <div>Currently, there are no events.  Create One!</div>
   }
 
-  const publicEvents = events.filter((event) => event.is_public)
-  console.log(publicEvents.reverse())
-
-  return publicEvents.reverse().map((event) => {
+  let allevents = events.filter((event) => event.is_public)
+  allevents = allevents.sort((event1, event2) => {
+    if(event1.date > event2.date){
+      return 1
+    } else {return -1}
+  })
+  return allevents.map((event) => {
     return (
       <div>
         <Event event={event} />

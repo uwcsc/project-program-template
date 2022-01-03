@@ -1,26 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
 
 * {
+  font-family: 'Sora', sans-serif;
+}
+
+.container {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Sora', sans-serif;
 }
-html {
+
+.container html {
   font-size: 16px;
 }
 
-input {
+.container input {
   font-size: 14px;
 }
 
-body {
+.container body {
   line-height: 1.4;
   color: #333333;
   font-family: Helvetica, Arial, sans-serif;
 }
 
-h1 {
+.container h1 {
   margin-bottom: 16px;
 }
 
@@ -62,7 +66,6 @@ button:disabled {
   background: #7c5cbf94;
 }
 
-/* Join Page Styles */
 
 .centered-form {
   background: #2c2591;
@@ -93,7 +96,13 @@ button:disabled {
   width: 100%;
 }
 
+.toggleform__button {
+  background-color: transparent;
+}
 
+.toggleform__button:hover {
+  background-color: transparent;
+}
 
 /*
 .App-logo {
