@@ -1,6 +1,6 @@
 const connector = require("../conn");
 const mongoose = require("mongoose");
-const user = require("../models/user");
+const userDao = require("../models/user");
 
 /**
  * Adds a new user object to the mongoDB database.
@@ -16,7 +16,7 @@ const user = require("../models/user");
  * ! I don't know if this will update a user or create a new user. I will Update accordingly.
  */
 const addUser = async (userObj) => {
-	const newUser = user.User({ ...userObj });
+	const newUser = userDao.User({ ...userObj });
 	try {
 		await newUser.save();
 
@@ -43,7 +43,7 @@ const addUser = async (userObj) => {
  * @returns a boolean, true if this method was successful and false otherwise.
  */
 const addBasicUser = async (firstname, lastname, username, email) => {
-	const newUser = user.User({
+	const newUser = userDao.User({
 		firstname: firstname,
 		lastname: lastname,
 		username: username,
@@ -76,17 +76,18 @@ const addBasicUser = async (firstname, lastname, username, email) => {
  * @returns a boolean, true if this method was successful and false otherwise.
  */
 const updateUser = async (username, field, value) => {
-	const db = await getDb();
-	const query = {
-		username: { $eq: username },
-	};
-	const toUpdate = {
-		$set: {
-			field: value,
-		},
-	};
+	try {
+		const userToUpdate = await userDao.User.findOne({ username: username }).exec();
 
-	return (await db.collection("users").updateOne(query, toUpdate)).acknowledged;
+		userToUpdate.field = value;
+		userToUpdate.save();
+
+		return true;
+	} catch (err) {
+		console.error(err);
+
+		return false;
+	}
 };
 
 /**
@@ -100,12 +101,15 @@ const updateUser = async (username, field, value) => {
  * @returns a boolean, true if this method was successful and false otherwise.
  */
 const deleteUser = async (username) => {
-	const db = await getDb();
-	const query = {
-		username: { $eq: username },
-	};
+	try {
+		const desiredUser = await userDao.User.deleteOne({ username: username }).exec();
 
-	return (await db.collection("users").deleteOne(query)).acknowledged;
+		return true;
+	} catch (err) {
+		console.error(err);
+
+		return false;
+	}
 };
 
 /**
@@ -115,12 +119,15 @@ const deleteUser = async (username) => {
  * @returns the user, or `null` if one cannot be found.
  */
 const getUser = async (username) => {
-	const db = await getDb();
-	const query = {
-		username: { $eq: username },
-	};
+	try {
+		const desiredUser = await userDao.User.findOne({ username: username }).exec();
 
-	return await db.collection("users").findOne(query);
+		return desiredUser;
+	} catch (err) {
+		console.error(err);
+
+		return null;
+	}
 };
 
 /**
@@ -145,14 +152,27 @@ const hasUser = async (username) => {
  * Note that this search is case-insensitive.
  *
  * @param searchString a string containing a substring to look for in users.
- * @returns a list of `userSchema` containing potential user matches.
+ * @returns a list of documents of type `userSchema` containing potential user matches.
  */
 const findMatchingUsers = async (searchString) => {
-	const db = await getDb();
-	const query = { username: { $regex: searchString, $options: "i" } };
+	try {
+		const desiredUsers = await userDao.User.find({
+			username: { $regex: searchString, $options: "i" },
+		})
+			.limit(10)
+			.exec();
 
-	return (await db.collection("users").find(query)).toArray();
+		return desiredUsers;
+	} catch (err) {
+		console.error(err);
+
+		return null;
+	}
 };
 
 exports.addUser = addUser;
 exports.addBasicUser = addBasicUser;
+exports.updateUser = updateUser;
+exports.getUser = getUser;
+exports.hasUser = hasUser;
+exports.findMatchingUsers = findMatchingUsers;

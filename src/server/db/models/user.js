@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: "A username must be provided!",
 		trim: true,
+		unique: true,
 	},
 	email: {
 		type: String,
