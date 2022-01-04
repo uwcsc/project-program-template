@@ -4,7 +4,7 @@ const addEvent = async (event) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(event),
   };
-  fetch("/events/add", requestOptions)
+  fetch("/events/add/", requestOptions)
     .then((response) => response.json())
     .then((data) => this.setState({ postId: data.id }));
 };
@@ -19,7 +19,7 @@ const joinEvent = async (body) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
-  fetch("/events/" + body.eventid + "update", requestOptions)
+  fetch("/events/" + body.eventid, requestOptions)
     .then((response) => response.json())
     .then((data) => this.setState({ postId: data.id }));
   window.location.reload();

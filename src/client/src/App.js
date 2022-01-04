@@ -33,14 +33,20 @@ class App extends Component {
     return user;
   };
 
-  signup = async () => {
-    const response = await fetch("/users/signup/");
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.error);
-    }
-    return body;
+  signup = async (user) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    };
+    fetch("/users/login/", requestOptions)
+      .then((response) => response.json())
+      .catch((e) => {
+        return console.log(e)
+      })
+      console.log(user)
+    localStorage.setItem("currentUser", user.username)
+    return user;
   };
 
   render() {
@@ -64,9 +70,15 @@ class App extends Component {
       e.preventDefault();
       alert("signing in");
 
-      this.signup();
+      this.signup({
+        firstname: e.target.elements.firstname.value,
+        lastname: e.target.elements.lastname.value,
+        username: e.target.elements.username.value,
+        email: e.target.elements.email.value,
+        password: e.target.elements.password.value
+      });
 
-      //navigate('/home')
+      navigate('/home')
     };
 
     return login ? (

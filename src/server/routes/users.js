@@ -7,8 +7,8 @@ const { addBasicUser, getUser } = require('../db/dao');
 userRoutes.route("/users/login/").post(async function(req, res) {
   console.log("Logging in..");
   await db.conn.connectToDatabase();
-  console.log(req.body)
   const formattedUsername = req.body.username.padEnd(12, '.').substring(0, 12);
+  console.log(formattedUsername)
   let db_user = await db.users.getUser(formattedUsername);
   if(db_user == null) {
       await db.users.addBasicUser(req.body.firstname, req.body.lastname, formattedUsername, req.body.email);

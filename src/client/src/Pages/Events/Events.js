@@ -1,38 +1,45 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./css/Events.css";
+import "../css/Events.css";
 import EventList from "./EventList";
 import NavBar from "../../components/navbar/NavBar";
-import { FaSearch } from 'react-icons/fa'
-import api from './events-api-calls/calls.js'
+import { FaSearch } from "react-icons/fa";
+import api from "./events-api-calls/calls.js";
 
 function Events() {
   // Get current user's events
   const [eventList, setUserEvents] = useState(null);
   const [showAddEvent, toggleAddEvent] = useState(false);
 
-  useEffect(async () => {
-    const response = await fetch("/events/");
-    const body = await response.json();
-    if (response.status !== 200) {
-      throw Error(body);
-    }
-    console.log({body})
-    setUserEvents(body);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/events/");
+      const body = await response.json();
+      if (response.status !== 200) {
+        throw Error(body);
+      }
+      return body
+    };
+    fetchData().then((data) => {
+      setUserEvents(data)
+    }).catch((e) => {
+      console.log(e)
+    })
   }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Validate and sanitize this data before pushing to db
-    console.log(e.target.elements.isPublic.value)
+    console.log(e.target.elements.isPublic.value);
     const event = {
       name: e.target.elements.name.value,
       date: e.target.elements.date.value,
       location: e.target.elements.location.value,
       isPublic: e.target.elements.isPublic.value === "on",
-      participants: e.target.elements.participants.value
+      participants: e.target.elements.participants.value,
     };
 
     await api.addEvent(event);
@@ -42,10 +49,10 @@ function Events() {
   };
 
   const search = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    await api.searchEvents(e.target.elements.query.value)
-    window.location.reload()
+    await api.searchEvents(e.target.elements.query.value);
+    window.location.reload();
   };
 
   return (
@@ -61,7 +68,9 @@ function Events() {
             name="query"
             placeholder="Look for an Event"
           ></input>
-          <button><FaSearch /></button>
+          <button>
+            <FaSearch />
+          </button>
         </form>
         <button
           class="add-event"
@@ -109,7 +118,6 @@ function Events() {
                 type="text"
                 name="participants"
                 placeholder="Who's coming?"
-                required
               ></input>
             </div>
             <button>Add Your Event</button>

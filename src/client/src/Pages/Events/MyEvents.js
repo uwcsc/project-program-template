@@ -1,25 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../../components/navbar/NavBar";
-import './css/Events.css'
+import Event from "./Event.js";
+import "../css/Events.css";
 
 function MyEvents() {
-  const [myEvents, setMyEvents] = useState(null)
+  const [myEvents, setMyEvents] = useState(null);
 
   useEffect(async () => {
-    const response = await fetch('/myevents')
-    const body = await response.json()
+    const response = await fetch("/users/:id/events/");
+    const body = await response.json();
     if (response.status !== 200) {
       throw Error(body.error);
     }
     setMyEvents(body.events);
-  })
+  });
 
   return (
-    <div>
+    <div class="event-list">
       <NavBar />
-      <div class="event-list">
-        {myEvents}
+      <header>
+        <h1>My Events</h1>
+      </header>
+      <div class="upcoming-events">
+        {myEvents ? (
+          <div>
+            {myEvents.map((event) => {
+              return <Event event={event} />;
+            })}
+          </div>
+        ) : (
+          <div style={{textAlign:"center"}}>
+            You have not joined any events. Go to the{" "}
+            <Link to="/eventlist">Event List</Link> tab to join or create public
+            events
+          </div>
+        )}
       </div>
     </div>
   );

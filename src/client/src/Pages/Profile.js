@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import NavBar from "../../components/navbar/NavBar";
-import "./Profile.css";
+import NavBar from "../components/navbar/NavBar";
+import "./css/Profile.css";
 
 import { FaPen } from "react-icons/fa";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,7 @@ function Profile() {
   const navigate = useNavigate();
   const [editMode, toggleEditMode] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
+  const currUsername = localStorage.getItem("currentUser");
 
   const currentUserUsername = localStorage
     .getItem("currentUser")
@@ -28,18 +29,35 @@ function Profile() {
     setCurrentUser(body);
   }, []);
 
-  const currUsername = localStorage.getItem("currentUser");
+  const updateUser = async (updates) => {
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    };
+    fetch("/users/" + currentUserUsername + "/update", requestOptions)
+      .then((response) => response.json())
+      .then((data) => this.setState({ postId: data.id }));
+    window.location.reload();
+  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const username = e.target.elements.username;
-    const email = e.target.elements.email;
-    const password = e.target.elements.password;
+    if (editMode) {
+      //save changes
+      const username = e.target.elements.username.value;
+      const email = e.target.elements.email.value;
+      const password = e.target.elements.password.value;
+      await updateUser({
+        username,
+        email,
+        password
+      })
+    }
+    toggleEditMode(!editMode);
     //send this info to database as async
 
     //send alert once data is updated
-    toggleEditMode(!editMode);
     navigate("/profile");
   };
 
@@ -56,7 +74,7 @@ function Profile() {
             <input
               type="text"
               name="username"
-              placeholder={currentUser.username}
+              placeholder={currUsername}
               disabled={editMode ? "" : "disabled"}
               required
             ></input>
@@ -79,7 +97,7 @@ function Profile() {
             {editMode ? (
               <button>Save Changes</button>
             ) : (
-              <button onClick={() => toggleEditMode(!editMode)}>
+              <button>
                 <FaPen />
                 <span>Edit Profile</span>
               </button>

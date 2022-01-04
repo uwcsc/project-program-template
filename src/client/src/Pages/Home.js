@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "../../components/navbar/NavBar";
-import "./Home.css";
+import NavBar from "../components/navbar/NavBar";
+import "./css/Home.css";
 
 function Home() {
   return (
@@ -31,6 +31,7 @@ function Home() {
                 </li>
               </ul>
             </div>
+            <div>image here</div>
             <img src="" alt="" />
           </div>
         </div>

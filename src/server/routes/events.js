@@ -20,11 +20,8 @@ eventRoutes.route("/events/:id").get(async function(req, res) {
 
 eventRoutes.route("/events/add").post(async function(req, res) {
     await db.conn.connectToDatabase();
-    req.body.participants = req.body.participants.split(',').map((participant) => {
-      return participant.trim()
-    }) 
+    // req.body.participants = req.body.participants.split(',')
     db.events.addBasicEvent(req.body.name, req.body.date, true);
-
 });
 
 eventRoutes.route("/events/:id").delete(async function(req, res) {
@@ -39,7 +36,19 @@ eventRoutes.route("/events/:id").delete(async function(req, res) {
     }
 })
 
-//update event route
+
+//Fix this
+// eventRoutes.route("/events/:id").patch(async function (req, res) {
+//   console.log(`updating ${req.params.id} on server with new participant`)
+//   const result = await db.events.updateEvent(ObjectId(req.params.id), 'participants', req.body.newValue)
+//   console.log(result)
+//   if(result) {
+//      res.send(req.body.user + " has joined the event" )
+//   } else {
+//     res.status(404).send("Event does not exist")
+//   }
+// })
+
 
 
 // eventRoutes.route("/events/:userid").get(async function(req, res) {
