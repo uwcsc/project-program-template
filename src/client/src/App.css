@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+* {
+  font-family: 'Sora', sans-serif;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container html {
+  font-size: 16px;
+}
+
+.container input {
+  font-size: 14px;
+}
+
+.container body {
+  line-height: 1.4;
+  color: #333333;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.container h1 {
+  margin-bottom: 16px;
+}
+
+.container label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #777;
+}
+
+input {
+  border: 1px solid #eeeeee;
+  padding: 12px;
+  outline: none;
+  border-radius: 7px;
+}
+
+input:hover {
+  background: #b4b7e2;
+  transition: 0.3s;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px;
+  background: #dfd10c;
+  border: none;
+  color: #333333;
+  font-size: 16px;
+  transition: background .3s ease;
+}
+
+button:hover {
+  background: #ccc125;
+}
+
+button:disabled {
+  cursor: default;
+  background: #7c5cbf94;
+}
+
+.centered-form {
+  background: #2c2591;
+  width: 100vw;
+  height: 100vh;   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-form__box {
+  box-shadow: 0px 0px 17px 1px #1D1F26;
+  background: #F7F7FA;
+  padding: 24px;
+  width: 450px;
+}
+
+.centered-form button {
+  width: 100%;
+}
+
+.centered-form input {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+
+.toggleform__button {
+  background-color: transparent;
+}
+
+.toggleform__button:hover {
+  background-color: transparent;
+}
+
+/*
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.welcome {
+  justify-content: center;
+  display: block;
+  align-items: center;
+  width: 100%;
+  background-color: beige;
+  padding: 50px;
+}
+
+.welcome h1 {
+  color: black;
+  font-size: 30pt;
+  font-weight: 500;
+}
+
+.welcome h1 span {
+  color: rgb(12, 212, 219);
+  font-size: 33pt;
+  font-weight: 700;
+}
+
+.welcome button {
+  margin-top: 50px;
+  height: 50px;
+  width: 150px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style: "Cochin";
+  font-size: 15pt;
+  border-radius: 3px;
+  justify-content: center;
+  background-color: #fff9ac;
+  transition: ease-in 0.3s;
+}
+
+.welcome button:hover {
+  box-shadow: #FE4880;
+  background-color: hsl(56, 93%, 73%);
+  cursor: pointer;
+}
+*/

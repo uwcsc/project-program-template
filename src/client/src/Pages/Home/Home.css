@@ -1,0 +1,32 @@
+.home-container {
+  top: 80px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(221, 221, 221);
+  position: absolute;
+}
+
+.header {
+  margin-top: 5%;
+  text-align: center;
+}
+
+span {
+  color: rgb(45, 45, 121);
+  font-weight: bold;
+}
+
+.info-block {
+  padding: 40px;
+  padding-left: 60px;
+  font-size: 20px;
+}
+
+.info-block h3 {
+  text-align: center;
+}
+
+.text {
+  display: flex;
+}
